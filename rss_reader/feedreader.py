@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
- 
+import json
+
 headers = {
     'User-Agent': 'your-user-agent-here'
 }
@@ -29,9 +30,13 @@ class ReadRss:
             pubdate = a.find('pubDate').text if a.find('pubDate') else ''
             self.articles_dicts.append({
                 'title': title,
-                'link': link,
+                'href': link,
                 'description': description,
-                'pubdate': pubdate
+                'author': "",
+                'date': pubdate,
+                'src': "https://images-fibreglast-com.s3.amazonaws.com/pio-resized/750/Single%20Stage%20Light%20Blue%20Paint-24.jpg",
+                'alt': "",
+                'newsSource': ""
             })
         self.urls = [d['link'] for d in self.articles_dicts if 'link' in d]
         self.titles = [d['title'] for d in self.articles_dicts if 'title' in d]
@@ -40,6 +45,10 @@ class ReadRss:
  
 if __name__ == '__main__':
     feed = ReadRss('https://feeds.washingtonpost.com/rss/politics', headers)
-    for title in feed.titles:
-        print(title)
+    
+    with open('articles.json', 'w') as file:
+        for article in feed.articles_dicts:
+            json_str = json.dumps(article, indent=4)
+            file.write(json_str)
+            file.write('\n')
     
