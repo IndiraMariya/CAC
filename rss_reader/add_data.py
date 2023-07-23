@@ -10,7 +10,6 @@ api_key = os.environ.get('SUPABASE_KEY')
 # Initialize the Supabase client
 supabase = Client(url, api_key)
 
-idVal = 1
 
 # Open the JSON file
 with open('./articles.json') as f:
@@ -20,11 +19,13 @@ with open('./articles.json') as f:
 for article in data:
     # Extract the title
     name = article['title']
+    newsSource = article['newsSource']
     #insert data
-    data = supabase.table("Data").insert({"id": idVal, "name":name, "articleData": article}).execute()
+    data = supabase.table("Data").upsert({
+        "name":name, 
+        "articleData": article, 
+        "newsSource": newsSource}).execute()
     assert len(data.data) > 0
-    # Update the idVal index
-    idVal += 1
 
     
 
