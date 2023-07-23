@@ -1,13 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import csv
 
 headers = {
     'User-Agent': 'your-user-agent-here'
 }
- 
+
 class ReadRss:
-    def __init__(self, rss_url, headers):
+    def __init__(self, rss_url, headers, source):
         self.url = rss_url
         self.headers = headers
         try:
@@ -36,19 +37,17 @@ class ReadRss:
                 'date': pubdate,
                 'src': "https://images-fibreglast-com.s3.amazonaws.com/pio-resized/750/Single%20Stage%20Light%20Blue%20Paint-24.jpg",
                 'alt': "",
-                'newsSource': ""
+                'newsSource': source
             })
-        self.urls = [d['link'] for d in self.articles_dicts if 'link' in d]
-        self.titles = [d['title'] for d in self.articles_dicts if 'title' in d]
-        self.descriptions = [d['description'] for d in self.articles_dicts if 'description' in d]
-        self.pub_dates = [d['pubdate'] for d in self.articles_dicts if 'pubdate' in d]
- 
-if __name__ == '__main__':
-    feed = ReadRss('https://feeds.washingtonpost.com/rss/politics', headers)
-    
-    with open('articles.json', 'w') as file:
-        for article in feed.articles_dicts:
-            json_str = json.dumps(article, indent=4)
-            file.write(json_str)
-            file.write('\n')
-    
+        self.urls = [d['href'] for d in self.articles_dicts]
+        self.titles = [d['title'] for d in self.articles_dicts]
+        self.descriptions = [d['description'] for d in self.articles_dicts]
+        self.pub_dates = [d['date'] for d in self.articles_dicts]
+
+# if __name__ == '__main__':
+with open ('rss_feeds.csv') as file:
+    content = csv.reader(file)
+    for row in content:
+        feed = ReadRss(row[0], headers, row[1])
+        with open('articles.json', 'a') as file:
+            json.dump(feed.articles_dicts, file, indent=4)
