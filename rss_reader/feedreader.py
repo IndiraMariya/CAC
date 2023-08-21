@@ -2,6 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import csv
+from dotenv import load_dotenv
+import os
+from supabase import Client
+import json
 
 headers = {
     'User-Agent': 'your-user-agent-here'
@@ -43,11 +47,30 @@ class ReadRss:
         self.titles = [d['title'] for d in self.articles_dicts]
         self.descriptions = [d['description'] for d in self.articles_dicts]
         self.pub_dates = [d['date'] for d in self.articles_dicts]
+        print(self.articles)
+
+
+def add_data(article_data):
+    load_dotenv()
+    url = os.environ.get('SUPABASE_URL')
+    api_key = os.environ.get('SUPABASE_KEY')
+    # Initialize the Supabase client
+    supabase = Client(url, api_key)
+
+    name = article_data['title']
+    newsSource = article_data['newsSource']
+    #insert data
+    data = supabase.table("Data").upsert({
+        "name":name, 
+        "articleData": article_data, 
+        "newsSource": newsSource}).execute()
+    assert len(data.data) > 0
+
 
 # if __name__ == '__main__':
 with open ('rss_feeds.csv') as file:
     content = csv.reader(file)
     for row in content:
         feed = ReadRss(row[0], headers, row[1])
-        with open('articles.json', 'a') as file:
-            json.dump(feed.articles_dicts, file, indent=4)
+        print(row[0])
+        # json.dump(feed.articles_dicts, file, indent=4)
