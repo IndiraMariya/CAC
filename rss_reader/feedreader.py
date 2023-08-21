@@ -33,7 +33,8 @@ class ReadRss:
             link = a.find('link').text if a.find('link') else ''
             description = a.find('description').text if a.find('description') else ''
             pubdate = a.find('pubDate').text if a.find('pubDate') else ''
-            self.articles_dicts.append({
+
+            article_data = {
                 'title': title,
                 'href': link,
                 'description': description,
@@ -42,12 +43,15 @@ class ReadRss:
                 'src': "https://images-fibreglast-com.s3.amazonaws.com/pio-resized/750/Single%20Stage%20Light%20Blue%20Paint-24.jpg",
                 'alt': "",
                 'newsSource': source
-            })
+            }
+            self.articles_dicts.append(article_data)  # Append the dictionary
+            add_data(article_data) #run the add data method to send data to supabase
+
         self.urls = [d['href'] for d in self.articles_dicts]
         self.titles = [d['title'] for d in self.articles_dicts]
         self.descriptions = [d['description'] for d in self.articles_dicts]
         self.pub_dates = [d['date'] for d in self.articles_dicts]
-        print(self.articles)
+        
 
 
 def add_data(article_data):
@@ -72,5 +76,5 @@ with open ('rss_feeds.csv') as file:
     content = csv.reader(file)
     for row in content:
         feed = ReadRss(row[0], headers, row[1])
-        print(row[0])
+        
         # json.dump(feed.articles_dicts, file, indent=4)
