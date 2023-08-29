@@ -1,8 +1,8 @@
 import { supabase } from '$lib/components/supabaseClient.js';
 
 export async function load() {
-	const { data } = await supabase.from('Topics').select();
+	const { data } = await supabase.from('Data').select();
 	return {
-		topics: data ?? []
+		articles: data ?? []
 	};
 }
