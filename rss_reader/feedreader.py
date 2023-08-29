@@ -72,7 +72,8 @@ def add_data(article_data):
 
 
 # if __name__ == '__main__':
-with open ('rss_feeds.csv') as file:
+with open ('/Users/indiram/Work/CAC/rss_reader/rss_feeds.csv') as file:
+    print("Articles Added")
     content = csv.reader(file)
     for row in content:
         feed = ReadRss(row[0], headers, row[1])
