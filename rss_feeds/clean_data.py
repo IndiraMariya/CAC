@@ -11,10 +11,6 @@ api_key = os.environ.get('SUPABASE_KEY')
 supabase = Client(url, api_key)
 
 
-# Open the JSON file
-with open('./articles.json') as f:
-    data = json.load(f)
-
 # Iterate through each element in the JSON data
 for article in data:
     # Extract the title
