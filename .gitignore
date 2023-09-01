@@ -2,3 +2,4 @@ rss_reader/.env
 .DS_Store
 Close
 rss_reader/logfile.txt
+rss_feeds/logfile.txt
