@@ -1,5 +1,8 @@
-rss_reader/.env
+/rss_reader/.env
 .DS_Store
 Close
 rss_reader/logfile.txt
-rss_feeds/logfile.txt
+/rss_feeds/logfile.txtj
+/rss_feeds/cron_update.sh
+/rss_feeds/.env
+/bag-of-words/
