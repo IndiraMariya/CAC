@@ -1,4 +1,5 @@
-rss_reader/.env
 .DS_Store
 Close
 rss_reader/logfile.txt
+rss_feeds/.env
+rss_feeds/cron_update.sh
