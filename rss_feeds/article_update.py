@@ -1,3 +1,4 @@
+#!/usr/bin/python3 
 from bs4 import BeautifulSoup
 import requests
 import csv
@@ -9,7 +10,7 @@ import json
 headers = {
     'User-Agent': 'your-user-agent-here'
 }
-
+load_dotenv()
 class ReadRss:
     def __init__(self, rss_url, headers, source):
         self.url = rss_url
@@ -54,7 +55,6 @@ class ReadRss:
 
 
 def add_data(article_data):
-    load_dotenv()
     url = os.environ.get('SUPABASE_URL')
     api_key = os.environ.get('SUPABASE_KEY')
     # Initialize the Supabase client
@@ -71,7 +71,8 @@ def add_data(article_data):
 
 
 # if __name__ == '__main__':
-with open ('/Users/indiram/Work/CAC/rss_feeds/rss_feeds.csv') as file:
+path = os.environ.get('SOURCE_PATH')
+with open (path) as file:
     print("Articles Added")
     content = csv.reader(file)
     for row in content:
