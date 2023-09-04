@@ -35,5 +35,4 @@ for row in data_to_delete:
             print(f"Deleted row with ID {row['id']}")
             count = count+1
     
-print("Deletion process completed.")
-print("%3d Articles Deleted" % (count))
+print(f"{count} Articles Deleted")
