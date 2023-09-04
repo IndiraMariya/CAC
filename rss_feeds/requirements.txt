@@ -1,0 +1,8 @@
+python-dotenv
+beautifulsoup4
+lxml
+gotrue==1.0.2
+supabase==1.0.3
+python-dateutil
+pytz
+DateTime
