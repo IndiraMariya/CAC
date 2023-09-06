@@ -1,6 +1,4 @@
-# Double Scoop
-
-Set up and automate RSS feed reader 
+# Set up and automate RSS feed reader 
 
 ## Installation
 
@@ -19,18 +17,18 @@ pip install -r requirements.txt
 
 ```bash
 #!/bin/bash
-export SOURCE='project_path'
+export SOURCE='project_src_path'
 source $SOURCE/.env
 
 echo -n "Updated on: "; date
-python3 $SOURCE/article_update.py
-python3 $SOURCE/clean_data.py
+python3 $SOURCE/src/article_update.py
+python3 $SOURCE/src/clean_data.py
 
 echo -e " "
 ```
 2. Setup symbolic link
 ```bash
-ln -s /full/path/to/project/main.py article_update
+ln -s ~/path/to/project/main.py article_update
 ```
 3. Create Cron Job
 ```
@@ -38,7 +36,7 @@ crontab -e
 ```
 4. Edit Cronjob
 ```bash
-0 7 * * * /Users/'user'/article_update >> /Users/'user'/log_folders/article_update_log.txt
+0 7 * * * ~/article_update >> ~/log_folders/article_update_log.txt
 ```
 This command runs article update every day at 7:00 AM. Time and frequency can be changed. For more information refer to:  [Crontab.guru](https://crontab.guru/#0_13_*_*_*)
 
@@ -49,10 +47,8 @@ This command runs article update every day at 7:00 AM. Time and frequency can be
 ```python
 SUPABASE_URL='your_url'
 SUPABASE_KEY='public_api_key'
-SOURCE_PATH='rss_feed_csv_file_path'
+SOURCE_PATH='~/CAC/rss_feeds/rss_feeds.csv'
 ```
-
-## Dependencies
 
 ## Dependencies
 
@@ -92,22 +88,3 @@ rss_feeds/
 
 ```
 
-## License
-This project is licensed under the MIT License - see the [LICENSE file](LICENSE) for details.
-
-## Authors
-
-- [Indira Mariya](link-to-author-profile)
-- [Sabrina Yen-Ko](link-to-author-profile)
-
-## Acknowledgments
-
-Mention any resources or tools you used or were inspired by.
-
-## Troubleshooting
-
-Common issues and troubleshooting tips.
-
-## Contact
-
-How to reach out for questions or support.
