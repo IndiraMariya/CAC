@@ -26,12 +26,12 @@ def clearArticles():
             json_date = row["articleData"]["date"]
             # Parse the JSON date using dateutil.parser with timezone mapping
             json_datetime = parser.parse(json_date, tzinfos=tzinfos)
-            one_month_ago = datetime.now(pytz.timezone('US/Eastern')) - timedelta(days=30)
+            one_month_ago = datetime.now(pytz.timezone('US/Eastern')) - timedelta(days=20)
             
             # Check if the JSON date is older than one month ago in Pacific timezone
             if json_datetime < one_month_ago:
                 delete_response = supabase.table("Data").delete().eq("id", row["id"]).execute()
-                print(f"Deleted row with ID {row['id']}")
+                # print(f"Deleted row with ID {row['id']}")
                 count = count+1
         
     print(f"{count} Articles Deleted")

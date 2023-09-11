@@ -93,8 +93,8 @@ def add_data(article_data):
         "articleData": article_data, 
         "newsSource": newsSource}).execute()
     assert len(data.data) > 0
-    if data.data and data.data[0].get('status') == 'ok':
-        count = count + 1
+    count = count + 1
+        
 
 def find_image(rss_link):
     global image_data
