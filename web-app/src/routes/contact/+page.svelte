@@ -6,7 +6,7 @@
     <header>
         <Nav></Nav>
     </header>
-    <h1 class="pb-5 text-4xl font-bold">FAQ</h1>
-    <p>this is the faq page.</p>
+    <h1 class="pb-5 text-4xl font-bold">Meet the Members</h1>
+    <p></p>
     
 </div>
