@@ -11,16 +11,43 @@
 	export let newsSource = '';
 
 	let hovering = false;
-</script>
+  	export let showModal = false;
+  	// @ts-ignore
+  	let dialog; // Reference to the dialog element
 
-<div class="relative group shadow h-70 w-96 flex flex-col rounded-md overflow-hidden">
+	function openModal() {
+		showModal = true;
+		// @ts-ignore
+		dialog.showModal();
+	}
+
+</script>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200&display=swap');
+	.all{
+		font-family: 'Source Serif 4';
+	}
+	.card{
+		border: 1px solid black;
+		background-color: rgba(255, 255, 255, 0.747);
+		
+	}
+	.card:hover{
+		border: 2px solid rgb(229, 49, 49);
+		background-color: rgba(255, 255, 255, 0.747);
+		background-color:rgba(255, 255, 255, 0.392);
+	}
+</style>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="card relative group shadow h-70 w-96 flex flex-col overflow-hidden all" role="button" tabindex="0" on:click={openModal}>
     <div class="flex justify-between">
-        <div class=" font-bold p-2" style="font-style:oblique; background-color: #FFFFFF; border-radius: 10px;">{newsSource}</div>
-        <div class="p-2 text-right" style="color:red;background-color: #FFFFFF; border-radius: 10px;">{new Date(date).toLocaleDateString()}</div>
+        <div class="font-medium p-2" style="font-style:oblique; color: black;">{newsSource}</div>
+        <div class="p-2 text-right" style="color:red;">{new Date(date).toLocaleDateString()}</div>
     </div>
 
-    <div class="bg-gray-200 p-2">
-        <div class="font-bold text-xl line-clamp-2 overflow-hidden">{title}</div>
+    <div class="p-2">
+        <div class="font-medium text-xl line-clamp-2 overflow-hidden">{title}</div>
     </div>
 
     <a
@@ -31,43 +58,14 @@
         on:mouseleave={() => {
             hovering = false;
         }}
-        class="w-full h-full"
+        class="w-full h-full font-thin"
     >
-        <img {src} {alt} class="w-full h-40 object-cover" />
+        <img {src} {alt} class="w-full h-60 object-cover" />
         <div class="p-3 overflow-hidden">
             <div>{author}</div>
             {#if hovering}
-                <div class="text-sm mt-3" transition:slide>{description}</div>
+                <div class="font-normal text-sm mt-3" transition:slide>{description}</div>
             {/if}
         </div>
     </a>
 </div>
-
-
-
-
-
-<!-- <div class="relative shadow h-60 w-96 flex flex-row rounded-md overflow-hidden transition-transform hover:scale-105 hover:border-2 border-transparent hover:border-red-500">
-	<a
-		{href}
-		on:mouseenter={() => {
-			hovering = true;
-		}}
-		on:mouseleave={() => {
-			hovering = false;
-		}}
-		class="w-full h-full"
-	>
-		<img {src} {alt} class="w-full h-full object-cover" />
-		<div class="absolute w-full bg-black/30 bottom-0 p-3" style="color:rgb(155,73,155);">
-			<div class="uppercase text-sm">{newsSource} - {new Date(date).toLocaleDateString()}</div>
-			<div class="font-bold text-xl">{title}</div>
-			<div>{author}</div>
-			{#if hovering}
-				<div class="text-sm mt-3" transition:slide>{description}</div>
-			{/if}
-		</div>
-	</a>
-</div> -->
-
-
