@@ -5,7 +5,8 @@
 # import csv
 # # import clean_data
 # from washpost import ReadRss
-from washpost import ReadRss
+from washpost import ReadWashpost
+from nyt import ReadNYT
 import os
 from dotenv import load_dotenv
 from supabase import Client
@@ -15,16 +16,17 @@ import csv
 headers = {
     'User-Agent': 'your-user-agent-here'
 }
-
+load_dotenv()
 
 
 if __name__ == '__main__':
     def switch_source(case):
         if case == 'Washington Post':
-            ReadRss(row[0], headers, row[1])
-            print(f"{case} successfully added" )
+            ReadWashpost(row[0], headers, row[1])
+            print(f"{case} articles successfully added" )
         elif case == 'New York Times':
-            print("This is case 2")
+            ReadNYT(row[0], headers, row[1])
+            print(f"{case} articles successfully added" )
         elif case == 'Fox News':
             print("This is case 3")
         elif case == 'Wall Street Journal':
@@ -34,7 +36,7 @@ if __name__ == '__main__':
 
     path = os.environ.get('SOURCE_PATH')
     
-    with open ('/Users/indiram/Work/CAC/rss_feeds/rss_feeds.csv') as file:
+    with open (path) as file:
         content = csv.reader(file)
         for row in content:
             source = row[1]

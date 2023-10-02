@@ -6,9 +6,10 @@ from supabase import Client
 import os
 import re
 
-count = 0     
+count = 0
+load_dotenv()    
 
-class ReadRss:
+class ReadWashpost:
     def __init__(self, rss_url, headers, source):
         global articleIndex
         self.url = rss_url
@@ -38,13 +39,12 @@ class ReadRss:
                 'description': description,
                 'author': "",
                 'date': pubdate,
-                'src': find_image(link),
+                'src': scrape_img(link),
                 'alt': "",
                 'newsSource': source
             }
             self.articles_dicts.append(article_data)  # Append the dictionary
             add_data(article_data)  # Run the add data method to send data to supabase
-            articleIndex += 1
 
         self.urls = [d['href'] for d in self.articles_dicts]
         self.titles = [d['title'] for d in self.articles_dicts]
@@ -70,13 +70,15 @@ def add_data(article_data):
         count = count + 1
 
 
-def find_image(article_url):
+def scrape_img(article_url):
     try:
         # Send a GET request to the article URL
         response = requests.get(article_url)
         response.raise_for_status()  # Raise an exception for any HTTP errors
+
         # Parse the HTML content of the article
         soup = BeautifulSoup(response.text, 'html.parser')
+
         # Find the image element by inspecting the HTML structure of the webpage
         img_element = soup.find('img', {'style': re.compile(r'background-image:.*url\([\'"](.*?)[\'"]\)')})
 
@@ -88,12 +90,12 @@ def find_image(article_url):
                 image_urls = [url.strip() for url in srcset_attr.split(',')]
                 # Take the first URL as the top image (you can adjust this logic)
                 top_image_url = image_urls[0].split()[0]
-                # Display the top image URL
-                return(top_image_url)
+
             else:
                 print("No 'srcset' attribute found for the image.")
         else:
             print("No image found on the webpage.")
+
     except requests.exceptions.RequestException as e:
         print(f"Error fetching the article: {e}")
 
