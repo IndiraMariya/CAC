@@ -6,8 +6,8 @@
 </div>
 
 <hr class="border-top border-black mb-1">
-<div class=" text-black top-40 left-0 right-0 z-50 text-center border border-black mb-5 shadow-[0_3px_3px_rgba(0,0,0,0.3)]" >
-    <div class="px-4 py-2 font-body text-black font-regular text-base">
+<div class=" top-40 left-0 right-0 z-50 text-center border border-black mb-5 shadow-[0_3px_3px_rgba(0,0,0,0.3)]" >
+    <div class="px-4 py-2 font-display font-semibold text-black text-base">
         <nav class="container mx-auto flex justify-evenly items-center">
             <a class="nav-link px-4 hover:text-red-500" href="/"><i>HOME</i></a>
             <a class="nav-link px-4 hover:text-red-500" href="/explore"><i>EXPLORE</i></a>

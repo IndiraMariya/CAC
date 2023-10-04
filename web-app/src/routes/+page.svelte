@@ -32,11 +32,11 @@
 	<a href="https://www.merriam-webster.com/dictionary/modal">merriam-webster.com</a>
 </Modal>
 
-<div class="p-5 text-p_blue w-100">
+<div class="p-5 text-black w-100">
 	<Nav></Nav>
-	<div class="pt-3 font-body bg-p_blue/10 border-[1px] border-p_blue">
-		<div class="p-6">
-			<h1 class="font-normal pb-5 text-4xl font-bold">Your Daily Scoop</h1>
+	<div class="font-body border-[1px] border-black">
+		<div class="px-6">
+			<h1 class="font-light font-display italic py-4 text-2xl">What's the daily scoop?</h1>
 			<div class="articles flex flex-wrap gap-4 ">
 				{#each data.articles as article}
 					{#if article.articleData}

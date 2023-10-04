@@ -10,8 +10,8 @@ const config = {
 				p_red: 'rgb(229, 49, 49)'
 			},
 			fontFamily: {
-				display: ['"Source Serif 4"'],
-				header: ['"Source Serif 4"'],
+				display: ['"Roboto Serif"'],
+				header: ['"Roboto Serif"'],
 				body: ['"Source Serif 4"']
 			}
 		}
