@@ -9,25 +9,6 @@
 </script>
 
 
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200&display=swap');
-	main {
-	  padding-top: 10px; 
-	  font-family: 'Source Serif 4';
-	  background-color: rgba(59, 73, 155, 0.126);
-	  border: 1px solid rgb(34, 44, 98);
-
-	  /* border-radius: 15px; */
-	}
-	.page-container {
-        /* border: 30px solid rgb(59,73,155);  */
-        padding: 20px; 
-		color: rgb(34, 44, 98);
-		zoom: 0.8; 
-        width: 100%;
-    }
-  </style>
 <Search></Search>
 <Modal bind:showModal>
 	<h2 class="text-3xl">
@@ -51,9 +32,9 @@
 	<a href="https://www.merriam-webster.com/dictionary/modal">merriam-webster.com</a>
 </Modal>
 
-<div class="page-container">
+<div class="p-5 text-p_blue w-100">
 	<Nav></Nav>
-	<main>
+	<div class="pt-3 font-body bg-p_blue/10 border-[1px] border-p_blue">
 		<div class="p-6">
 			<h1 class="font-normal pb-5 text-4xl font-bold">Your Daily Scoop</h1>
 			<div class="articles flex flex-wrap gap-4 ">
@@ -64,7 +45,7 @@
 				{/each}
 			</div>
 		</div>	
-	</main>
+	</div>
 </div>
 
 <Footer></Footer>

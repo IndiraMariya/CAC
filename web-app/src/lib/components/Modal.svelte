@@ -10,11 +10,13 @@
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
 	on:click|self={() => dialog.close()}
+    class="max-w-4xl mx-5 rounded-sm text-color-p_blue p-3 font-body open:backdrop:bg-black/30"
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation>
+	<div on:click|stopPropagation class="p-4">
         <!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>x</button>
+		<button autofocus 
+        on:click={() => dialog.close()} class="absolute top-10 right-20 text-2xl cursor-pointer">x</button>
 		<slot name="header" />
 		<hr />
 		<slot />
@@ -23,21 +25,6 @@
 </dialog>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200&display=swap');
-	dialog {
-		max-width: 62em;
-		border-radius: 0.2em;
-		border: none;
-		padding: 15dpx;
-        color: rgb(34, 44, 98);
-        font-family: 'Source Serif 4';
-	}
-	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
-	}
-	dialog > div {
-		padding: 1em;
-	}
 	dialog[open] {
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
@@ -59,13 +46,5 @@
 		to {
 			opacity: 1;
 		}
-	}
-	button {
-		display: block;
-        position: absolute;
-		top: 10px;
-		right: 20px;
-		font-size: 24px;
-		cursor: pointer;
 	}
 </style>
