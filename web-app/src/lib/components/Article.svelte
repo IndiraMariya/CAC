@@ -9,7 +9,6 @@
 	export let src = '';
 	export let alt = '';
 	export let newsSource = '';
-
 	export let color = 'p_blue';
 
 	let hovering = false;
@@ -26,14 +25,18 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	class="outline outline-1 outline-black hover:outline-2 hover:outline-p_red relative shadow h-70 w-full py-5 px-4 flex flex-row items-center gap-4 overflow-hidden font-body color-p_text card hover:bg-white/30"
+	class="{src
+		? 'col-span-2'
+		: 'col-span-1'} outline outline-1 outline-black hover:outline-2 hover:outline-p_red relative shadow h-70 w-full py-5 px-4 flex flex-row items-center gap-4 overflow-hidden font-body color-p_text card hover:bg-white/30"
 	role="button"
 	tabindex="0"
 	on:click={openModal}
 >
-	<a class="max-w-[50%] w-[350px] h-60 shrink-0" {href}>
-		<img {src} {alt} class="w-full h-full object-cover" />
-	</a>
+	{#if src}
+		<a class="max-w-[50%] w-[350px] h-60 shrink-0" {href}>
+			<img {src} {alt} class="w-full h-full object-cover" />
+		</a>
+	{/if}
 
 	<div class="h-full flex flex-col justify-between w-full">
 		<div class="font-normal text-2xl color-p_text">{title}</div>

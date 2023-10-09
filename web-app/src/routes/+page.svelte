@@ -41,7 +41,8 @@
 			<h1 class="font-light font-display italic py-4 text-2xl color-p_text">
 				What's the daily scoop?
 			</h1>
-			<div class="articles grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+			<div class="articles grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+				<!-- TODO: Account for accurately grouping articles without images -->
 				{#each data.articles as article}
 					{#if article.articleData}
 						<Article {...article.articleData} bind:showModal />

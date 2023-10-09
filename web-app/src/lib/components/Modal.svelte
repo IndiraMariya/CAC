@@ -10,13 +10,16 @@
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
 	on:click|self={() => dialog.close()}
-    class="max-w-4xl mx-5 rounded-sm text-color-p_blue p-3 font-body open:backdrop:bg-black/30"
+	class="max-w-4xl mx-5 rounded-sm text-color-p_blue p-3 font-body open:backdrop:bg-black/30"
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation class="p-4">
-        <!-- svelte-ignore a11y-autofocus -->
-		<button autofocus 
-        on:click={() => dialog.close()} class="absolute top-10 right-20 text-2xl cursor-pointer">x</button>
+		<!-- svelte-ignore a11y-autofocus -->
+		<button
+			autofocus
+			on:click={() => dialog.close()}
+			class="absolute top-10 right-20 text-2xl cursor-pointer">x</button
+		>
 		<slot name="header" />
 		<hr />
 		<slot />
