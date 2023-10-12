@@ -1,6 +1,4 @@
 <script>
-	import { slide } from 'svelte/transition';
-
 	export let title = '';
 	export let href = '';
 	export let description = '';
@@ -11,15 +9,22 @@
 	export let newsSource = '';
 	export let color = 'p_blue';
 
-	let hovering = false;
 	export let showModal = false;
-	// @ts-ignore
-	let dialog; // Reference to the dialog element
+	export let modalData;
 
 	function openModal() {
+		modalData = {
+			title,
+			href,
+			description,
+			author,
+			date,
+			src,
+			alt,
+			newsSource,
+			color
+		};
 		showModal = true;
-		// @ts-ignore
-		dialog.showModal();
 	}
 </script>
 
