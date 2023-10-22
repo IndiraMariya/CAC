@@ -34,6 +34,7 @@
     div{
         background-color: #FDF5F0;
     }
+    
   </style>
   
   <div>
@@ -43,11 +44,10 @@
         </svg>
       </button>
   </div>
-
   
   {#if showMessage}
     <input type="text" placeholder="Search.." bind:value={searchText}>
-    <p>You entered: {searchText}</p> <!-- Display the entered text -->
+    <!-- <p>You entered: {searchText}</p> Display the entered text -->
   {/if}
 
  

@@ -7,3 +7,4 @@ rss_reader/logfile.txt
 /rss_feeds/.env
 /bag-of-words/
 topic/.env
+rss_feeds/src/remove_img.py
