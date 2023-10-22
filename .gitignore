@@ -6,3 +6,4 @@ rss_reader/logfile.txt
 /rss_feeds/cron_update.sh
 /rss_feeds/.env
 /bag-of-words/
+topic/.env
