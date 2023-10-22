@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import requests
 from supabase import Client
+from dateutil.parser import parse
+import datetime
 import os
 import re
 
@@ -60,14 +62,17 @@ def add_data(article_data):
 
     name = article_data['title']
     newsSource = article_data['newsSource']
+
+    article_date = parse(article_data['date'], fuzzy=True)
+    date = article_date.strftime("%m/%d/%Y, %H:%M:%S")
     #insert data
     data = supabase.table("Data").upsert({
         "name":name, 
         "articleData": article_data, 
-        "newsSource": newsSource}).execute()
+        "newsSource": newsSource,
+        "date":date}).execute()
     assert len(data.data) > 0
-    if data.data and data.data[0].get('status') == 'ok':
-        count = count + 1
+    count = count + 1
 
 
 def scrape_img(article_url):
@@ -75,13 +80,10 @@ def scrape_img(article_url):
         # Send a GET request to the article URL
         response = requests.get(article_url)
         response.raise_for_status()  # Raise an exception for any HTTP errors
-
         # Parse the HTML content of the article
         soup = BeautifulSoup(response.text, 'html.parser')
-
         # Find the image element by inspecting the HTML structure of the webpage
         img_element = soup.find('img', {'style': re.compile(r'background-image:.*url\([\'"](.*?)[\'"]\)')})
-
         if img_element:
             # Extract the image URL from the 'srcset' attribute
             srcset_attr = img_element.get('srcset')
@@ -89,13 +91,16 @@ def scrape_img(article_url):
                 # Split the srcset attribute by commas to separate different URLs
                 image_urls = [url.strip() for url in srcset_attr.split(',')]
                 # Take the first URL as the top image (you can adjust this logic)
-                top_image_url = image_urls[0].split()[0]
+                return image_urls[0].split()[0]
 
             else:
-                print("No 'srcset' attribute found for the image.")
+                # print("No 'srcset' attribute found for the image.")
+                return ""
         else:
-            print("No image found on the webpage.")
+            # print("No image found on the webpage.")
+            return ""
 
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching the article: {e}")
+        # print(f"Error fetching the article: {e}")
+        return ""
 

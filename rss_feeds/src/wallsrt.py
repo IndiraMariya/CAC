@@ -3,18 +3,18 @@ from bs4 import BeautifulSoup
 import requests
 from dotenv import load_dotenv
 import os
+import feedparser
 from dateutil.parser import parse
 import datetime
 from supabase import Client
 
-
 headers = {
     'User-Agent': 'your-user-agent-here'
 }
-count = 0
 load_dotenv()
+count = 0
 
-class ReadNYT:
+class ReadWSJ:
     def __init__(self, rss_url, headers, source):
         global articleIndex
         self.url = rss_url
@@ -32,14 +32,17 @@ class ReadNYT:
             print(e)
         self.articles = self.soup.findAll('item')
         self.articles_dicts = []
-        # find_image(rss_url)
+        
+        articleIndex = 0  # Initialize article index
+        feed = feedparser.parse(rss_url)
+        count = len(feed.entries)
 
         for a in self.articles:
             title = a.find('title').text if a.find('title') else ''
-            link = a.find('link').text if a.find('link') else ''
+            link = feed.entries[articleIndex].link
             description = a.find('description').text if a.find('description') else ''
             pubdate = a.find('pubDate').text if a.find('pubDate') else ''
-            image_url = fetch_image_url(self, a)
+            image_url = fetchImg(link)
 
             article_data = {
                 'title': title,
@@ -80,15 +83,27 @@ def add_data(article_data):
         "date":date}).execute()
     assert len(data.data) > 0
     count = count + 1
-    
-def fetch_image_url(self, article):
-    media_content = article.find('media:content', {"medium": "image"})
-    if media_content:
-        return media_content['url']
+
+def fetchImg(link):
+    url = link
+    response = requests.get(url)
+    if response.status_code == 200:
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        img_tags = soup.find_all('img')
+
+        if len(img_tags) >= 2:
+            # Get the second image's 'src' attribute
+            second_image_url = img_tags[1]['src']
+            print("Second Image URL:", second_image_url)
+            return second_image_url
+        else:
+            print("There are not enough images on the page to retrieve the second one.")
+            return ""
     else:
-        return ''
+        print(f"Failed to fetch the page. Status code: {response.status_code}")
+        return ""
         
 
-
 if __name__ == '__main__':
-    ReadNYT("https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", headers, "New York Times")
+    ReadWSJ("https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml", headers, "Wall Street Journal")

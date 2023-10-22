@@ -5,8 +5,10 @@
 # import csv
 # # import clean_data
 # from washpost import ReadRss
+from clean_data import clearArticles
 from washpost import ReadWashpost
 from nyt import ReadNYT
+from fox import ReadFox
 import os
 from dotenv import load_dotenv
 from supabase import Client
@@ -20,6 +22,8 @@ load_dotenv()
 
 
 if __name__ == '__main__':
+    clearArticles()
+
     def switch_source(case):
         if case == 'Washington Post':
             ReadWashpost(row[0], headers, row[1])
@@ -28,7 +32,8 @@ if __name__ == '__main__':
             ReadNYT(row[0], headers, row[1])
             print(f"{case} articles successfully added" )
         elif case == 'Fox News':
-            print("This is case 3")
+            ReadFox(row[0], headers, row[1])
+            print(f"{case} articles successfully added" )
         elif case == 'Wall Street Journal':
             print("This is case 4")
         else:
@@ -41,6 +46,3 @@ if __name__ == '__main__':
         for row in content:
             source = row[1]
             switch_source(source)
-    
-    # print(f"{count} Articles Added")
-    # clean_data.clearArticles()
