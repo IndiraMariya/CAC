@@ -4,6 +4,8 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Search from '$lib/components/Search.svelte';
+	import search_term from '$lib/components/Search.svelte';
+	
 	export let data;
 	let showModal = false;
 	let modalData = {
@@ -42,5 +44,6 @@
 </div>
 
 <Footer />
+
 
 <!-- <Topic></Topic> -->
