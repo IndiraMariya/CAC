@@ -1,7 +1,7 @@
 import { supabase } from '$lib/components/supabaseClient.js';
 
 export async function load({ url }) {
-	const search_term = url.searchParams.get('q');
+	const search_term = url.searchParams.get('q') || '';
 
 	const { data, error } = await supabase
 		.rpc('get_data')
