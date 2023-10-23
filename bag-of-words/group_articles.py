@@ -1,6 +1,3 @@
-import os
-from dotenv import load_dotenv
-from supabase import create_client, Client
 import pandas as pd
 import numpy as np
 
@@ -21,12 +18,9 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
-load_dotenv()
+from utilities import getSupabaseClient
 
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
-print("establishing client")
-supabase: Client = create_client(url, key)
+supabase = getSupabaseClient()
 
 # load in data
 print("Reading in data")
