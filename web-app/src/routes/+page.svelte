@@ -29,8 +29,8 @@
 		<div class="p-5 text-black w-full h-full">
 			<Nav />
 			<div class="font-body border-[1px] border-black">
-				<div class="px-6">
-					<h1 class="font-light font-display italic py-4 text-2xl color-p_text">
+				<div class="p-6">
+					<h1 class="font-light font-display italic pb-4 text-2xl color-p_text">
 						What's the daily scoop?
 					</h1>
 					<div class="articles grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
