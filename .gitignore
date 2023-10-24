@@ -8,3 +8,8 @@ rss_reader/logfile.txt
 /bag-of-words/
 topic/.env
 rss_feeds/src/remove_img.py
+rss_feeds/src/__pycache__/clean_data.cpython-38.pyc
+.gitignore
+rss_feeds/src/__pycache__/fox.cpython-38.pyc
+rss_feeds/src/__pycache__/nyt.cpython-38.pyc
+rss_feeds/src/__pycache__/washpost.cpython-38.pyc
