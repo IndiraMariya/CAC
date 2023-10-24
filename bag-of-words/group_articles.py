@@ -18,6 +18,7 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
+from keyword_extraction import get_grouped_data, extract_keybert_keyterms
 from utilities import get_supabase_client, read_data_from_supabase
 
 supabase = get_supabase_client()
@@ -119,15 +120,22 @@ elif ALG == _DBSCAN:
     NUM_CLUSTERS = len(cluster_sizes)
     print(f"Number of elements assigned to each cluster: {cluster_sizes}")
 
-data['group'] = clusterer.labels_
+data['topic'] = clusterer.labels_
+combined['topic'] = clusterer.labels_
 
 for cluster in range(NUM_CLUSTERS):
     print("-------------- CLUSTER #" + str(cluster))
-    print(data.loc[data['group'] == cluster]['title'])
+    print(data.loc[data['topic'] == cluster]['title'])
+
+# get tags
+grouped_data_as_list = get_grouped_data(combined)
+print(grouped_data_as_list[0])
+tags = extract_keybert_keyterms(grouped_data_as_list)
+data['tags'] = data['topic'].map({topic: tags for topic, tags in enumerate(tags)})
 
 # write data to supabase
-only_topics_df = data[['id', 'title', 'group']]
-only_topics_df = only_topics_df.rename(columns={'title': "name", 'group': "topic"})
+only_topics_df = data[['id', 'title', 'topic', 'tags']]
+only_topics_df = only_topics_df.rename(columns={'title': "name"})
 
 print(only_topics_df.head())
 
