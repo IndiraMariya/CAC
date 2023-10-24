@@ -8,25 +8,25 @@
         name: 'Indira Mariya',
         role: 'Developer',
         blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non purus at ante aliquet.',
-        image: 'john.jpg', // Image file path
+        image: '/filler_img.jpeg', // Image file path
       },
       {
         name: 'Jane Smith',
         role: 'Developer',
         blurb: 'Vestibulum cursus ultricies nulla, ut vehicula ligula iaculis at. Fusce tristique malesuada.',
-        image: 'jane.jpg',
+        image: '/filler_img.jpeg',
       },
       {
         name: 'Bob Johnson',
         role: 'Designer',
         blurb: 'Aenean a libero elit. Phasellus egestas vel elit id bibendum. Vivamus bibendum euismod dui.',
-        image: 'bob.jpg',
+        image: '/filler_img.jpeg',
       },
       {
-        name: 'Bob Johnson',
+        name: 'Shmob Johnson',
         role: 'Designer',
         blurb: 'Aenean a libero elit. Phasellus egestas vel elit id bibendum. Vivamus bibendum euismod dui.',
-        image: 'bob.jpg',
+        image: '/filler_img.jpeg',
       },
     ];
 </script>
@@ -50,4 +50,5 @@
   </div>  
     
 </PageContainer>
+
 <Footer></Footer>
