@@ -12,11 +12,13 @@ headers = {
     'User-Agent': 'your-user-agent-here'
 }
 load_dotenv()
+sLean = ""
 
 class ReadFox:
-    def __init__(self, rss_url, headers, source):
+    def __init__(self, rss_url, headers, source, lean):
         self.url = rss_url
         self.headers = headers
+        sLean = lean
         try:
             self.r = requests.get(rss_url, headers=self.headers)
             self.status_code = self.r.status_code
@@ -76,7 +78,8 @@ class ReadFox:
             "name":name, 
             "articleData": article_data, 
             "newsSource": newsSource,
-            "date":date}).execute()
+            "date":date, 
+            "source_lean": sLean}).execute()
         assert len(data.data) > 0
 
 def fetchImg(link):

@@ -9,13 +9,15 @@ import os
 import re
 
 count = 0
-load_dotenv()    
+load_dotenv()
+mediaLean = ""
 
 class ReadWashpost:
-    def __init__(self, rss_url, headers, source):
+    def __init__(self, rss_url, headers, source, lean):
         global articleIndex
         self.url = rss_url
         self.headers = headers
+        mediaLean = lean
         try:
             self.r = requests.get(rss_url, headers=self.headers)
             self.status_code = self.r.status_code
@@ -70,7 +72,8 @@ def add_data(article_data):
         "name":name, 
         "articleData": article_data, 
         "newsSource": newsSource,
-        "date":date}).execute()
+        "date":date,
+        "source_lean": mediaLean,}).execute()
     assert len(data.data) > 0
     count = count + 1
 

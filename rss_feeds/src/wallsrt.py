@@ -13,12 +13,14 @@ headers = {
 }
 load_dotenv()
 count = 0
+sLean = ""
 
 class ReadWSJ:
-    def __init__(self, rss_url, headers, source):
+    def __init__(self, rss_url, headers, source, lean):
         global articleIndex
         self.url = rss_url
         self.headers = headers
+        sLean = lean
         try:
             self.r = requests.get(rss_url, headers=self.headers)
             self.status_code = self.r.status_code
@@ -80,7 +82,8 @@ def add_data(article_data):
         "name":name, 
         "articleData": article_data, 
         "newsSource": newsSource,
-        "date":date}).execute()
+        "date":date,
+        "source_lean": sLean}).execute()
     assert len(data.data) > 0
     count = count + 1
 
@@ -106,4 +109,4 @@ def fetchImg(link):
         
 
 if __name__ == '__main__':
-    ReadWSJ("https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml", headers, "Wall Street Journal")
+    ReadWSJ("https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml", headers, "Wall Street Journal", "Center")

@@ -26,13 +26,13 @@ if __name__ == '__main__':
 
     def switch_source(case):
         if case == 'Washington Post':
-            ReadWashpost(row[0], headers, row[1])
+            ReadWashpost(row[0], headers, row[1], row[2])
             print(f"{case} articles successfully added" )
         elif case == 'New York Times':
-            ReadNYT(row[0], headers, row[1])
+            ReadNYT(row[0], headers, row[1], row[2])
             print(f"{case} articles successfully added" )
         elif case == 'Fox News':
-            ReadFox(row[0], headers, row[1])
+            ReadFox(row[0], headers, row[1], row[2])
             print(f"{case} articles successfully added" )
         elif case == 'Wall Street Journal':
             print("This is case 4")

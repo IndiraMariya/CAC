@@ -14,11 +14,14 @@ headers = {
 count = 0
 load_dotenv()
 
+sourceLean = ""
+
 class ReadNYT:
-    def __init__(self, rss_url, headers, source):
+    def __init__(self, rss_url, headers, source, lean):
         global articleIndex
         self.url = rss_url
         self.headers = headers
+        sourceLean = lean
         try:
             self.r = requests.get(rss_url, headers=self.headers)
             self.status_code = self.r.status_code
@@ -77,7 +80,8 @@ def add_data(article_data):
         "name":name, 
         "articleData": article_data, 
         "newsSource": newsSource,
-        "date":date}).execute()
+        "date":date,
+        "source_lean": sourceLean,}).execute()
     assert len(data.data) > 0
     count = count + 1
     
@@ -91,4 +95,4 @@ def fetch_image_url(self, article):
 
 
 if __name__ == '__main__':
-    ReadNYT("https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", headers, "New York Times")
+    ReadNYT("https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", headers, "New York Times", "Far Left")
