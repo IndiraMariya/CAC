@@ -18,13 +18,13 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
-from utilities import getSupabaseClient
+from utilities import get_supabase_client, read_data_from_supabase
 
-supabase = getSupabaseClient()
+supabase = get_supabase_client()
 
 # load in data
 print("Reading in data")
-response = supabase.table('Data').select("*").execute()
+response = read_data_from_supabase(supabase)
 data = [[article['id'], article['articleData']['title'], article['articleData']['description']] for article in response.data if article is not None and article["articleData"] is not None]
 data = pd.DataFrame(data, columns=["id", "title", "description"])
 
