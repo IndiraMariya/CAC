@@ -16,7 +16,7 @@
 			xmlns="http://www.w3.org/2000/svg"
 			height="1em"
 			viewBox="0 0 512 512"
-			class="fill-red-300 hover:fill-red-500"
+			class="fill-red-300 hover:fill-red-500 absolute right-2 top-2"
 			id="searchIcon"
 			class:move-right={isClicked}
 			><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -29,7 +29,7 @@
 
 {#if showMessage}
 	<form action="/">
-		<input type="text" name="q" placeholder="Search.." bind:value={searchText} />
+		<input class = "absolute right-2 top-4" type="text" name="q" placeholder="Search.." bind:value={searchText} />
 		<!-- <p>You entered: {searchText}</p> Display the entered text -->
 	</form>
 {/if}
@@ -40,16 +40,15 @@
 		transition: transform 0.3s; /* Add a smooth transition effect */
 	}
 	svg {
-		position: absolute;
+		/* position: absolute; */
 		padding: 20px;
-		right: 10px;
 		width: 70px;
 		height: 70px;
 	}
 	input {
 		position: absolute;
 		padding: 20px;
-		right: 10px;
+		right: 20px;
 		width: 200px;
 		height: 50px;
 		border-radius: 5px;

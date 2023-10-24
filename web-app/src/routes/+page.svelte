@@ -4,7 +4,7 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Search from '$lib/components/Search.svelte';
-	import search_term from '$lib/components/Search.svelte';
+	import Filter from '$lib/components/Filter.svelte';
 
 	export let data;
 	let showModal = false;
@@ -23,7 +23,10 @@
 
 <div class="min-h-[100vh] flex flex-col justify-between">
 	<div>
-		<Search />
+		<div style="display: flex; align-items: center;">
+			<Search />
+			<Filter />
+		</div>
 		<Modal bind:showModal bind:data={modalData} />
 
 		<div class="p-5 text-black w-full h-full">
