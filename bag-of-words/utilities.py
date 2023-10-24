@@ -35,8 +35,10 @@ def read_data_from_csv(file_name='datasets/supabase_data/data.csv') -> DataFrame
     data = pd.read_csv(file_name)
     return data
 
-def combine_text_fields(df: DataFrame, field_1="title", field_2="description", combined_name="text") -> DataFrame:
+def combine_text_fields(df: DataFrame, field_1="title", field_2="description", combined_name="text", other_fields=['id']) -> DataFrame:
     # combine text fields
     combined = pd.DataFrame(df[field_1] + "; " + df[field_2], columns=[combined_name])
-    combined['id'] = df['id']
+
+    for field in other_fields:
+        combined[field] = df[field]
     return combined
