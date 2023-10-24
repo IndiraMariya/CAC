@@ -2,6 +2,7 @@ import textacy
 import spacy
 from textacy import extract
 from keybert import KeyBERT
+from keyphrase_vectorizers import KeyphraseCountVectorizer
 
 from utilities import read_data_from_csv, combine_text_fields
 
@@ -33,9 +34,16 @@ def extract_keybert_keyterms(kw_model):
     keywords = kw_model.extract_keywords(test_data, keyphrase_ngram_range=(1, 3), stop_words="english")
     print(keywords)
 
-
+# Create KeyBERT
 kw_model = KeyBERT()
-extract_keybert_keyterms(kw_model)
 nlp = spacy.load("en_core_web_lg", exclude=['tagger', 'parser', 'ner', 'attribute_ruler', 'lemmatizer'])
 kw_spacy_model = KeyBERT(model=nlp)
+
+# print("---- TEXACY KEYTERMS ----")
+# extract_texacy_keyterms()
+
+print("---- KeyBERT KEYTERMS ----")
+extract_keybert_keyterms(kw_model)
 extract_keybert_keyterms(kw_spacy_model)
+print(kw_model.extract_keywords(test_data, vectorizer=KeyphraseCountVectorizer()))
+print(kw_spacy_model.extract_keywords(test_data, vectorizer=KeyphraseCountVectorizer()))
