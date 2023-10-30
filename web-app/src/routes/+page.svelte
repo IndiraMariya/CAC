@@ -32,11 +32,9 @@
 
 		<div class="p-5 text-black w-full h-full">
 			<Nav />
-			<div class="font-body border-[1px] border-black">
-				{#each data.articlesGroups as topic}
-					<Topic {...topic} bind:showModal bind:modalData />
-				{/each}
-			</div>
+			{#each data.articlesGroups as topic}
+				<Topic {...topic} bind:showModal bind:modalData />
+			{/each}
 		</div>
 	</div>
 

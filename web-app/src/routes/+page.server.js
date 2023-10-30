@@ -10,8 +10,7 @@ export async function load({ url }) {
 	const { data, error } = await supabase
 		.rpc('get_data')
 		.ilike('name', `%${search_term}%`)
-		.order(filter, { ascending: false, nullsFirst: false })
-		.limit(150);
+		.order(filter, { ascending: false, nullsFirst: false });
 
 	let max_topic = -1;
 	for (let i = 0; i < data.length; i++) {
@@ -23,7 +22,7 @@ export async function load({ url }) {
 	for (let i = 0; i < max_topic + 1; i++) {
 		let articles = data.filter((article) => article['topic'] == i);
 
-		if (articles.length) {
+		if (articles.length > 2) {
 			let firstArticle = articles[0];
 			groupedArticles.push({
 				topic: firstArticle['topic'],
