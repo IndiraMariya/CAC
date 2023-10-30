@@ -1,36 +1,7 @@
 import textacy
-import spacy
 from textacy import extract
 from keybert import KeyBERT
 from keyphrase_vectorizers import KeyphraseCountVectorizer
-import pandas as pd
-
-from utilities import read_data_from_csv, combine_text_fields
-
-# =============================== Read in Data
-df = read_data_from_csv()
-filled_data = df.fillna("")
-combined = combine_text_fields(filled_data, other_fields=["id", "topic"])
-
-
-def get_grouped_data(combined_data) -> list:
-    grouped_data = combined_data.groupby('topic', as_index=False).agg({"text": ' '.join})
-    # print(grouped_data.iloc[0])
-
-    # convert topics to integers
-    grouped_data['topic'] = pd.to_numeric(grouped_data['topic'], downcast='integer')
-
-    # sort data by topic
-    sorted_data = grouped_data.sort_values(by='topic')
-    # print(sorted_data['text'].iloc[0])
-
-    # convert to list
-    list_data = sorted_data["text"].values.tolist()
-    return list_data
-
-list_data = get_grouped_data(combined)
-# test_data = list_data[0]
-
 
 # =============================== Key Term Functions
 def extract_texacy_keyterms(data):
@@ -66,7 +37,7 @@ def extract_keybert_keyterms(data, kw_model=KeyBERT(), vectorizer=KeyphraseCount
 
 
 # Create KeyBERT
-kw_model = KeyBERT()
+# kw_model = KeyBERT()
 # nlp = spacy.load("en_core_web_lg", exclude=['tagger', 'parser', 'ner', 'attribute_ruler', 'lemmatizer'])
 # kw_spacy_model = KeyBERT(model=nlp)
 # vectorizer = KeyphraseCountVectorizer()
@@ -74,7 +45,6 @@ kw_model = KeyBERT()
 # print("---- TEXACY KEYTERMS ----")
 # extract_texacy_keyterms()
 
-test_data = list_data[:10]
 # print("---- KeyBERT KEYTERMS ----")
 # extract_keybert_keyterms(test_data, kw_model, vectorizer=None)
 # extract_keybert_keyterms(test_data, kw_spacy_model, vectorizer=None)

@@ -42,3 +42,18 @@ def combine_text_fields(df: DataFrame, field_1="title", field_2="description", c
     for field in other_fields:
         combined[field] = df[field]
     return combined
+
+def get_grouped_data(combined_data) -> list:
+    grouped_data = combined_data.groupby('topic', as_index=False).agg({"text": ' '.join})
+    # print(grouped_data.iloc[0])
+
+    # convert topics to integers
+    grouped_data['topic'] = pd.to_numeric(grouped_data['topic'], downcast='integer')
+
+    # sort data by topic
+    sorted_data = grouped_data.sort_values(by='topic')
+    # print(sorted_data['text'].iloc[0])
+
+    # convert to list
+    list_data = sorted_data["text"].values.tolist()
+    return list_data
