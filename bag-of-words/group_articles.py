@@ -18,8 +18,9 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
-from keyword_extraction import get_grouped_data, extract_keybert_keyterms
-from utilities import get_supabase_client, read_data_from_supabase
+from keyword_extraction import extract_keybert_keyterms
+from subjectivity_analysis import get_subjectivities
+from utilities import get_supabase_client, read_data_from_supabase, get_grouped_data
 
 supabase = get_supabase_client()
 
@@ -123,18 +124,23 @@ elif ALG == _DBSCAN:
 data['topic'] = clusterer.labels_
 combined['topic'] = clusterer.labels_
 
-for cluster in range(NUM_CLUSTERS):
-    print("-------------- CLUSTER #" + str(cluster))
-    print(data.loc[data['topic'] == cluster]['title'])
+# for cluster in range(NUM_CLUSTERS):
+#     print("-------------- CLUSTER #" + str(cluster))
+#     print(data.loc[data['topic'] == cluster]['title'])
 
 # get tags
+print("analyzing topics")
 grouped_data_as_list = get_grouped_data(combined)
-print(grouped_data_as_list[0])
 tags = extract_keybert_keyterms(grouped_data_as_list)
 data['tags'] = data['topic'].map({topic: tags for topic, tags in enumerate(tags)})
 
+# get subjectivity
+print("analyzing subjectivity")
+subjectivities = get_subjectivities(combined['text'].values.tolist())
+data['bias'] = subjectivities
+
 # write data to supabase
-only_topics_df = data[['id', 'title', 'topic', 'tags']]
+only_topics_df = data[['id', 'title', 'topic', 'tags', 'bias']]
 only_topics_df = only_topics_df.rename(columns={'title': "name"})
 
 print(only_topics_df.head())
