@@ -7,6 +7,8 @@
 	export let src = '';
 	export let alt = '';
 	export let newsSource = '';
+	export let bias = '';
+	export let sourceLean = '';
 	export let color = 'p_blue';
 
 	export let showModal = false;
@@ -22,7 +24,9 @@
 			src,
 			alt,
 			newsSource,
-			color
+			color,
+			bias,
+			sourceLean
 		};
 		showModal = true;
 	}
@@ -38,9 +42,9 @@
 	on:click={openModal}
 >
 	{#if src}
-		<a class="max-w-[50%] w-[350px] h-60 shrink-0" {href}>
+		<div class="max-w-[50%] w-[350px] h-60 shrink-0">
 			<img {src} {alt} class="w-full h-full object-cover" />
-		</a>
+		</div>
 	{/if}
 
 	<div class="h-full flex flex-col justify-between w-full">

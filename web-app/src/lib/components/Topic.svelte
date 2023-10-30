@@ -23,7 +23,13 @@
 			<!-- TODO: Account for accurately grouping articles without images -->
 			{#each articles as article}
 				{#if article.articleData}
-					<Article {...article.articleData} bind:showModal bind:modalData />
+					<Article
+						{...article.articleData}
+						sourceLean={article.source_lean}
+						bias={article.bias}
+						bind:showModal
+						bind:modalData
+					/>
 				{/if}
 			{/each}
 		</div>

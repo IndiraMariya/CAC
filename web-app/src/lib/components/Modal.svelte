@@ -9,14 +9,17 @@
 	 */
 	export let data;
 
-	$: ({ title, href, description, author, date, src, alt, newsSource, color } = data);
+	$: ({ title, href, description, author, date, src, alt, newsSource, bias, sourceLean, color } =
+		data);
 
 	/**
 	 * @type {HTMLDialogElement}
 	 */
 	let dialog;
 
-	$: if (dialog && showModal) dialog.showModal();
+	$: if (dialog && showModal) {
+		dialog.showModal();
+	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -29,27 +32,46 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		on:click|stopPropagation
-		class="m-auto bg-p_bg rounded-sm max-w-4xl p-7 grid grid-cols-2 gap-5"
+		class="m-auto bg-p_bg rounded-sm max-w-4xl p-7 grid {src ? 'grid-cols-2' : ''} gap-5"
 	>
-		<div>
-			{#if src}
-				<div class="w-full h-full shrink-0">
+		{#if src}
+			<div class="flex flex-col gap-3">
+				<div class="w-full h-full">
 					<img {src} {alt} class="w-full h-full object-cover" />
 				</div>
-			{/if}
-		</div>
+				<div class="flex flex-row gap-5 capitalize text-center font-body font-bold">
+					{#if bias}
+						<div class="w-full py-3 bg-p_blue text-white">{bias}</div>
+					{/if}
+					{#if sourceLean}
+						<div class="w-full py-3 bg-p_blue text-white">{sourceLean}</div>
+					{/if}
+				</div>
+			</div>
+		{/if}
 		<div class="flex flex-col justify-between align-start">
 			<div>
 				<div class="text-3xl pb-4">{title}</div>
 				<div class="font-light text-lg font-body italic uppercase pb-3">{newsSource}</div>
+				{#if !src}
+					<div class="flex flex-row gap-3 capitalize text-center font-body font-bold pb-3">
+						{#if bias}
+							<div class="py-2 px-5 bg-p_blue text-white">{bias}</div>
+						{/if}
+						{#if sourceLean}
+							<div class="py-2 px-5 bg-p_blue text-white">{sourceLean}</div>
+						{/if}
+					</div>
+				{/if}
 				<div class="font-bold text-sm pb-3">
 					{#if author}
 						<span class="pe-3">{author}</span>
 					{/if}
 					<span>{new Date(date).toLocaleDateString()}</span>
 				</div>
-				<div class="font-light text-sm">{description}</div>
+				<div class="font-light text-sm mb-5">{description}</div>
 			</div>
+
 			<div class="flex gap-2">
 				<!-- svelte-ignore a11y-autofocus -->
 				<button

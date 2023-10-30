@@ -18,7 +18,9 @@
 		src: '',
 		alt: '',
 		newsSource: '',
-		color: ''
+		color: '',
+		sourceLean: '',
+		bias: ''
 	};
 </script>
 
