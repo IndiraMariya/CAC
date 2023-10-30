@@ -26,7 +26,7 @@
 
 <div class="min-h-[100vh] flex flex-col justify-between">
 	<div>
-		<div style="display: flex; align-items: center;">
+		<div class="flex items-center">
 			<Search />
 			<Filter />
 		</div>

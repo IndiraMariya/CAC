@@ -1,32 +1,35 @@
-<div class=" text-black  top-0 left-0 right-0 z-50 py-2 text-center">
-    <a href="/">
-        <!-- svelte-ignore a11y-img-redundant-alt -->
-        <img src="/cartoonsketches500.png" alt="Description of the image" width="90" height="30" class="mx-auto absolute inset-0 flex items-center justify-center top-4">
-    </a>
+<div class="pt-6">
+	<a href="/" class="block pb-3">
+		<!-- svelte-ignore a11y-img-redundant-alt -->
+		<img
+			src="/cartoonsketches500.png"
+			alt="Stylized version of The Double Scoop"
+			width="90"
+			height="30"
+			class="mx-auto inset-0 flex items-center justify-center top-4"
+		/>
+	</a>
+	<hr class="border-top border-black mb-1 pt" />
+	<div class="text-center border border-black mb-5 shadow-[0_3px_3px_rgba(0,0,0,0.3)]">
+		<div class="px-4 py-2 font-display font-semibold text-black text-base">
+			<nav class="container mx-auto flex justify-evenly items-center">
+				<a class="nav-link px-4 hover:text-red-500" href="/">
+					<img src="/logo1.png" alt="Home" class="w-6 h-6 mr-1 inline" />
+					<span>HOME</span>
+				</a>
+				<a class="nav-link px-4 hover:text-red-500" href="/learn">
+					<img src="/logo2.png" alt="Learn" class="w-4 h-6 mr-1 inline" />
+					<span>LEARN</span>
+				</a>
+				<a class="nav-link px-4 hover:text-red-500" href="/about">
+					<img src="/logo3.png" alt="About" class="w-6 h-6 mr-1 inline" />
+					<span>ABOUT</span>
+				</a>
+				<a class="nav-link px-4 hover:text-red-500" href="/contact">
+					<img src="/logo4.png" alt="Contact" class="w-6 h-6 mr-1 inline" />
+					<span>CONTACT</span>
+				</a>
+			</nav>
+		</div>
+	</div>
 </div>
-<div class = "pt-6">
-    <hr class="border-top border-black mb-1 pt">
-    <div class="top-40 left-0 right-0 z-50 text-center border border-black mb-5 shadow-[0_3px_3px_rgba(0,0,0,0.3)]">
-      <div class="px-4 py-2 font-display font-semibold text-black text-base">
-        <nav class="container mx-auto flex justify-evenly items-center">
-          <a class="nav-link px-4 hover:text-red-500" href="/">
-            <img src="/logo1.png" alt="Home" class="w-6 h-6 mr-1 inline" />
-            <span>HOME</span>
-          </a>
-          <a class="nav-link px-4 hover:text-red-500" href="/learn">
-            <img src="/logo2.png" alt="Learn" class="w-4 h-6 mr-1 inline" />
-            <span>LEARN</span>
-          </a>
-          <a class="nav-link px-4 hover:text-red-500" href="/about">
-            <img src="/logo3.png" alt="About" class="w-6 h-6 mr-1 inline" />
-            <span>ABOUT</span>
-          </a>
-          <a class="nav-link px-4 hover:text-red-500" href="/contact">
-            <img src="/logo4.png" alt="Contact" class="w-6 h-6 mr-1 inline" />
-            <span>CONTACT</span>
-          </a>
-        </nav>
-      </div>
-    </div>
-</div>
-
