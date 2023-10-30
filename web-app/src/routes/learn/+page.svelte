@@ -18,76 +18,41 @@
 
 <PageContainer>
 	<Nav></Nav>
-	<h1 class="font-medium text-[50px]">Learn About Bias Detection</h1>
-    <br>
-    <section>
-        <h2 class="h2" >Understanding Bias</h2>
-        <p>Bias in articles can come in various forms, including political, cultural, and personal biases. It's important to recognize these biases to critically evaluate the information you consume.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Check the Source</h2>
-        <p>Start by assessing the credibility of the source. Is it a reputable news organization or a personal blog? Reliable sources are less likely to have biased content.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Identify Loaded Language</h2>
-        <p>Look for emotionally charged or loaded language in the article. Biased articles often use words that appeal to your emotions rather than presenting facts.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Consider the Tone</h2>
-        <p>Pay attention to the overall tone of the article. Biased articles may have a strong, one-sided perspective without presenting counterarguments.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Check for Omissions</h2>
-        <p>Biased articles may omit important information or downplay opposing viewpoints. Always look for a balanced presentation of facts.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Fact-Check Information</h2>
-        <p>Verify any statistics, quotes, or claims presented in the article. Biased sources may manipulate data to support their agenda.</p>
-    </section>
-    <br>
-    <br>
-    <section>
-        <h2 class="h2" >Seek Multiple Perspectives</h2>
-        <p>To avoid biases, read articles from various sources with different viewpoints. This helps you gain a well-rounded understanding of the topic.</p>
-    </section>
-    <br>
-    <br>
-	<h1 class="h2">Frequently Asked Questions</h1>
-    <br>
-    <section>
-        <h2 class="h3" >Q: What is Lorem Ipsum?</h2>
-        <p>A: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-    </section>
-    <br>
-    <section>
-        <h2 class="h3" >Q: Why do we use it?</h2>
-        <p>A: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-    </section>
-    <br>
-    <section>
-        <h2 class="h3" >Q: Where does it come from?</h2>
-        <p>A: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-    </section>
-    <br>
-    <section>
-        <h2 class="h3" >Q: Is it safe to use Lorem Ipsum?</h2>
-        <p>A: Yes, Lorem Ipsum is safe to use in design and typesetting. It's often used as a placeholder text in the printing and typesetting industry.</p>
-    </section>
-    <br>
-    <section>
-        <h2 class="h3" >Q: How can I generate Lorem Ipsum text?</h2>
-        <p>A: There are many online Lorem Ipsum generators available that can provide you with Lorem Ipsum text for your projects.</p>
-    </section>
-	
+	<h1 class="font-medium text-[50px]">What is Media Bias?</h1>
+
+<p>Media bias occurs when the opinions and beliefs of journalists and news organizations affect the news that they are reporting.</p>
+
+<p>Unfortunately, media bias is unavoidable. Everyone has their own set of experiences and beliefs, embedded into their lives. So it is impossible to expect a journalist to completely forget an integral part of themselves while writing an article. From the facts that a journalist does and doesn't report to the subtle language that they use, a journalist's beliefs will also.</p>
+<br>
+<h2 class="h2">What are some types of media bias?</h2>
+
+<ul>
+    <li><strong>Partisan Bias:</strong> When a journalist's political views impact news reporting.</li>
+    <li><strong>Demographic Bias:</strong> When factors like race, gender, or culture affect news coverage.</li>
+    <li><strong>Corporate Bias:</strong> When business or advertising interests influence story reporting.</li>
+    <li><strong>"Big Story" Bias:</strong> When journalists prioritize major events, potentially missing key details.</li>
+    <li><strong>Neutrality Bias:</strong> When attempts to avoid bias lead to factual misrepresentation.</li>
+</ul>
+<br>
+<h2 class="h2">How Media Bias Affects Us</h2>
+
+<p>In recent years, media bias has been creating more polarization, intolerance of dissent, and political segregation. With the advent of social media algorithms, the content that we view online has been tailored to our interests. Combined with the biased media that we consume, it is no surprise that our society is becoming more and more polarized. These same social media algorithms are also reinforcing such beliefs by making it so that only people with similar political ideologies interact with each other.</p>
+
+<p><strong>So what can we do?</strong> As a friend once said, "If you don't find out the facts by yourself, someone else will tell them for you." By limiting ourselves to reading from a singular source, we allow journalists to form our opinions. Instead, we need to learn methods to help us cut through the rhetoric and isolate the salient facts.</p>
+
+<p>The first, and most important, step is to understand media bias. Congratulations! By reading this article, you are already one step closer to avoiding media bias. Now that you have made it so far, it is important to continue your journey by researching and understanding the media bias at its core.</p>
+
+<p>The main way to combat this issue is to try lateral reading. This is a strategy used by professional fact checkers in which they read articles on the same issue on various different websites. Not only will this help to have a broader view of the issue at hand, but it will also allow you to compare the various articles against one another to verify evidence, contextualize information, and find potential weaknesses.</p>
+
+<p>Another way to combat this issue is to have more open discussions. Your views and experiences will always interfere with your understanding of issues, so by talking to other people with different experiences, they may be able to provide a new perspective.</p>
+<br>
+<h2 class="h2">Citations</h2>
+
+<p><a href="https://mccneb.edu/Community-Business/Library/Web-Sites/Media-Bias">Metropolitan Community College - Media Bias</a></p>
+<p><a href="https://pressbooks.pub/mediastudies/chapter/media-bias/">Fagen, E. M. G. M. A. L. A. L. A. A. - Media Bias</a></p>
+<p><a href="https://www.allsides.com/blog/what-media-bias">What is Media Bias? - AllSides</a></p>
+<p><a href="https://doi.org/10.1371/journal.pone.0266204">How do we raise media bias awareness effectively? Effects of visualizations to communicate bias - PLOS ONE; Public Library of Science</a></p>
+<p><a href="https://www.scribbr.com/frequently-asked-questions/what-is-lateral-reading/#:~:text=Lateral%20reading%20is%20the%20act,Find%20potential%20weaknesses">What is lateral reading? - Scribbr</a></p>
+<p><a href="https://medium.com/@SriramY/media-bias-its-impact-and-what-we-can-do-to-overcome-it-243f4a2fb6f3#:~:text=Another%20way%20to%20help%20overcome,end%20of%20the%20political%20spectrum">Media Bias: Its Impact and What We Can Do to Overcome It - Medium</a></p>
 </PageContainer>
 <Footer></Footer>

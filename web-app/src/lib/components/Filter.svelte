@@ -15,29 +15,18 @@
       filterCriteria = value;
       isPicked = !isPicked;
   
-      // Update the URL when filterCriteria changes
-      const urlSearchParams = new URLSearchParams(window.location.search);
+    // Update the URL when filterCriteria changes
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const existingQ = urlSearchParams.get('q');
+    urlSearchParams.set('filter', filterCriteria);
+    // If 'q' parameter exists, set it back to the updated URL
+    if (existingQ) {
+    urlSearchParams.set('q', existingQ);
+    }
 
-// Get the existing 'q' parameter
-const existingQ = urlSearchParams.get('q');
-
-// Update the 'filter' parameter
-urlSearchParams.set('filter', filterCriteria);
-
-// If 'q' parameter exists, set it back to the updated URL
-if (existingQ) {
-  urlSearchParams.set('q', existingQ);
-}
-
-// Get the updated URL with both 'q' and 'filter' parameters
-const updatedURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
-
-// Push the updated URL to the browser's history
-window.history.pushState({}, '', updatedURL);
-
-// Reload the page to reflect the changes
-window.location.reload();
-
+    const updatedURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
+    window.history.pushState({}, '', updatedURL);
+    window.location.reload();
     }
   
     function toggleFilter() {

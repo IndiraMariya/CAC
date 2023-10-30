@@ -1,10 +1,3 @@
-# from washpost import washpost
-# import os
-# from dotenv import load_dotenv
-# from supabase import Client
-# import csv
-# # import clean_data
-# from washpost import ReadRss
 from clean_data import clearArticles
 from washpost import ReadWashpost
 from nyt import ReadNYT
@@ -13,7 +6,6 @@ import os
 from dotenv import load_dotenv
 from supabase import Client
 import csv
-
 
 headers = {
     'User-Agent': 'your-user-agent-here'
@@ -34,8 +26,14 @@ if __name__ == '__main__':
         elif case == 'Fox News':
             ReadFox(row[0], headers, row[1], row[2])
             print(f"{case} articles successfully added" )
-        elif case == 'Wall Street Journal':
-            print("This is case 4")
+        elif case == 'Vox':
+            print("This is Vox")
+        elif case == 'CNN':
+            print("This is CNN")
+        elif case == 'New York Post':
+            print("This is NYP")
+        elif case == 'Daily Mail':
+            print("This is DM")
         else:
             print("This is the default case")
 
