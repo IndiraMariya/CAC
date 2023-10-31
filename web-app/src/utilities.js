@@ -103,7 +103,7 @@ export function filterDataBySearch(topics, searchQuery) {
 		let strippedQuery = searchQuery.trim().substring(1);
 
 		for (let i = 0; i < topics.length; i++) {
-			for (let j = 0; j < topics[i].tags.length; j++) {
+			for (let j = 0; j < Math.min(3, topics[i].tags.length); j++) {
 				if (topics[i].tags[j].includes(strippedQuery)) {
 					newTopics.push(topics[i]);
 					break;
