@@ -41,10 +41,14 @@
 				</div>
 				<div class="flex flex-row gap-5 capitalize text-center font-body font-bold">
 					{#if bias}
-						<div class="w-full py-3 bg-p_blue text-white">{bias}</div>
+						<div class="py-2 px-5 bg-p_blue text-white border-black border-[1px] inline-block">
+							{bias}
+						</div>
 					{/if}
 					{#if sourceLean}
-						<div class="w-full py-3 bg-p_blue text-white">{sourceLean}</div>
+						<div class="py-2 px-5 bg-p_blue text-white border-black border-[1px] inline-block">
+							{sourceLean}
+						</div>
 					{/if}
 				</div>
 			</div>
@@ -56,10 +60,12 @@
 				{#if !src}
 					<div class="flex flex-row gap-3 capitalize text-center font-body font-bold pb-3">
 						{#if bias}
-							<div class="py-2 px-5 bg-p_blue text-white">{bias}</div>
+							<div class="py-2 px-5 bg-p_blue text-white border-black border-[1px]">{bias}</div>
 						{/if}
 						{#if sourceLean}
-							<div class="py-2 px-5 bg-p_blue text-white">{sourceLean}</div>
+							<div class="py-2 px-5 bg-p_blue text-white border-black border-[1px]">
+								{sourceLean}
+							</div>
 						{/if}
 					</div>
 				{/if}
@@ -77,12 +83,12 @@
 				<button
 					autofocus
 					on:click={() => window.open(href, '_blank')}
-					class="cursor-pointer outline-black outline outline-1 inline-block py-1 px-3"
+					class="cursor-pointer border-black border-[1px] inline-block py-2 px-3 font-body"
 					>Read article</button
 				>
 				<button
 					on:click={() => dialog.close()}
-					class="cursor-pointer outline-black outline outline-1 inline-block py-1 px-3"
+					class="cursor-pointer border-black border-[1px] inline-block py-2 px-3 font-body"
 					>Close</button
 				>
 			</div>
