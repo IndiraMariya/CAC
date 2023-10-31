@@ -30,7 +30,7 @@
 		{ name: 'Topic', value: 'topic', ascending: null },
 		{ name: 'Bias', value: 'bias', ascending: null }
 	];
-	let searchText = '';
+	let searchText = '#';
 	let searchingTags = false;
 
 	$: filteredTopics = filterDataBySearch(data.articlesGroups, searchText);
@@ -46,7 +46,7 @@
 				<Search bind:searchText bind:searchingTags bind:filterData />
 			</div>
 			{#each filteredTopics as topic}
-				<Topic {...topic} bind:showModal bind:modalData bind:filterData />
+				<Topic {...topic} bind:showModal bind:modalData bind:filterData bind:searchText />
 			{/each}
 		</div>
 	</div>

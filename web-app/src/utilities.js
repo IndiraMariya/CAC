@@ -5,28 +5,36 @@ let biasToNumber = {
 	'mostly subjective': 3
 };
 
-// takes in a list of articles -> returns a list of articles with articles that have no images (src values) grouped together
-export function groupArticlesWithImages(articles, filterData) {
-	let sortedArticles = articles.slice();
-	sortedArticles.sort((a, b) => {
-		return (
-			// date
-			(filterData[0].ascending != null &&
-				(new Date(a.articleData[filterData[0].value]).getTime() -
-					new Date(b.articleData[filterData[0].value]).getTime()) *
-					(filterData[0].ascending ? 1 : -1)) ||
-			// bias
-			(filterData[2].ascending != null &&
-				(biasToNumber[a.articleData[filterData[2].value]] -
-					biasToNumber[b.articleData[filterData[2].value]]) *
-					(filterData[2].ascending ? 1 : -1))
-		);
-	});
+function shouldFilterByTag(searchText) {
+	return searchText.trim().substring(0, 1) == '#';
+}
 
+function filterArticles(articles, searchText) {
+	// TODO: implement fuzzy search???
+	let matchingArticles = [];
+	let nonMatchingArticles = [];
+	for (let i = 0; i < articles.length; i++) {
+		if (
+			articles[i].articleData.title.toLowerCase().includes(searchText) ||
+			articles[i].articleData.title.toLowerCase().includes(searchText)
+		) {
+			matchingArticles.push(articles[i]);
+		} else {
+			nonMatchingArticles.push(articles[i]);
+		}
+	}
+
+	return {
+		matchingArticles: matchingArticles,
+		nonMatchingArticles: nonMatchingArticles
+	};
+}
+
+function groupArticlesWithImages(articles) {
 	let newArticles = [];
 	let lastNoPhoto = null;
-	for (let i = 0; i < sortedArticles.length; i++) {
-		let firstArticle = sortedArticles[i];
+	for (let i = 0; i < articles.length; i++) {
+		let firstArticle = articles[i];
 		if (firstArticle.articleData) {
 			if (firstArticle.articleData.src) {
 				newArticles.push(firstArticle);
@@ -48,10 +56,50 @@ export function groupArticlesWithImages(articles, filterData) {
 	return newArticles;
 }
 
+function sortArticles(articles, filterData) {
+	let sortedArticles = articles.slice();
+	sortedArticles.sort((a, b) => {
+		return (
+			// date
+			(filterData[0].ascending != null &&
+				(new Date(a.articleData[filterData[0].value]).getTime() -
+					new Date(b.articleData[filterData[0].value]).getTime()) *
+					(filterData[0].ascending ? 1 : -1)) ||
+			// bias
+			(filterData[2].ascending != null &&
+				(biasToNumber[a.articleData[filterData[2].value]] -
+					biasToNumber[b.articleData[filterData[2].value]]) *
+					(filterData[2].ascending ? 1 : -1))
+		);
+	});
+	return sortedArticles;
+}
+
+// takes in a list of articles -> returns a list of articles with articles that have no images (src values) grouped together
+export function getArticles(articles, filterData, searchText) {
+	let peekArticles = articles.slice();
+	let hiddenArticles = [];
+
+	// article search
+	if (!shouldFilterByTag(searchText)) {
+		let { matchingArticles, nonMatchingArticles } = filterArticles(articles, searchText);
+
+		peekArticles = matchingArticles;
+		hiddenArticles = nonMatchingArticles;
+	}
+
+	const res = {
+		peek: groupArticlesWithImages(sortArticles(peekArticles, filterData)),
+		hidden: groupArticlesWithImages(sortArticles(hiddenArticles, filterData))
+	};
+
+	return res;
+}
+
 export function filterDataBySearch(topics, searchQuery) {
 	let newTopics = [];
 	// search by tag
-	if (searchQuery.trim().substring(0, 1) == '#') {
+	if (shouldFilterByTag(searchQuery)) {
 		let strippedQuery = searchQuery.trim().substring(1);
 
 		for (let i = 0; i < topics.length; i++) {

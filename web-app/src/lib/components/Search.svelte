@@ -5,7 +5,7 @@
 	let showMessage = false;
 	let isClicked = false;
 
-	export let searchText = '';
+	export let searchText = '#';
 	export let searchingTags = false;
 	export let filterData;
 
