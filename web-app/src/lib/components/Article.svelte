@@ -48,7 +48,7 @@
 	{/if}
 
 	<div class="h-full flex flex-col justify-between w-full">
-		<div class="font-normal text-2xl color-p_text">{title}</div>
+		<div class="font-normal text-2xl color-p_text pb-5">{title}</div>
 
 		<div class="flex flex-row gap-2 text-center flex-wrap">
 			<div
