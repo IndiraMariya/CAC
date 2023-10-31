@@ -1,4 +1,5 @@
 <script>
+	import { groupArticlesWithImages } from '../../utilities';
 	import Article from './Article.svelte';
 
 	export let topic = -1;
@@ -8,13 +9,15 @@
 	 */
 	export let articles = [];
 
+	articles = groupArticlesWithImages(articles);
+
 	export let showModal = false;
 	export let modalData;
 </script>
 
 <div class="font-body border-[1px] border-black mb-5">
 	<div class="p-6">
-		<div class="font-light font-display italic pb-4 text-2xl color-p_text flex flex-wrap gap-6">
+		<div class="font-light font-display italic pb-4 text-3xl color-p_text flex flex-wrap gap-6">
 			{#if tags}
 				{#each tags.slice(0, 3) as tag}
 					<div class="py-3"># {tag}</div>
