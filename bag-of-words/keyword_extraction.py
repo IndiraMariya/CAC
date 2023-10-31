@@ -1,7 +1,16 @@
+from itertools import combinations
+
 import textacy
 from textacy import extract
 from keybert import KeyBERT
 from keyphrase_vectorizers import KeyphraseCountVectorizer
+import spacy
+
+nlp = spacy.load("en_core_web_md")
+key_bert = KeyBERT()
+keyphrase_count_vectorizer = KeyphraseCountVectorizer()
+
+SIMILARITY_THRESHOLD = 0.9
 
 # =============================== Key Term Functions
 def extract_texacy_keyterms(data):
@@ -24,17 +33,34 @@ def extract_texacy_keyterms(data):
     return textrank, yake, scake, sgrank
 
 
-def extract_keybert_keyterms(data, kw_model=KeyBERT(), vectorizer=KeyphraseCountVectorizer(), only_keywords=True, debug=False):
+def extract_keybert_keyterms(data, kw_model=key_bert, vectorizer=keyphrase_count_vectorizer, only_keywords=True,
+                             max_keys=5, debug=False):
     if not vectorizer:
         keywords = kw_model.extract_keywords(data, keyphrase_ngram_range=(1, 3), stop_words="english")
     else:
-        keywords = kw_model.extract_keywords(data, vectorizer=vectorizer)
-    if debug: print(keywords)
+        keywords = kw_model.extract_keywords(data, vectorizer=vectorizer, use_mmr=True, diversity=0.5)
 
-    if only_keywords: return [[tag for (tag, num) in article_kw] for article_kw in keywords]
+    if debug:
+        print(keywords)
+
+    if only_keywords:
+        return [[tag for (tag, num) in article_kw][:max_keys] for article_kw in keywords]
 
     return keywords
 
+
+def remove_similar_terms(terms: list[list[str]], _nlp=nlp):
+    # based on: https://towardsdatascience.com/how-to-filter-out-similar-texts-in-python-c7e7c5f7620e
+    embeddings = [[_nlp(term) for term in term_group] for term_group in terms]
+
+    for embeddings_group in embeddings:
+        all_pairs = list(combinations(embeddings_group, 2))
+
+        similar_terms = [(p1, p2) for p1, p2 in all_pairs if p1.similarity(p2) > SIMILARITY_THRESHOLD]
+
+    # TODO: combine similar terms to a singular term
+
+    pass
 
 # Create KeyBERT
 # kw_model = KeyBERT()
