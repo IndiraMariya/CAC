@@ -34,14 +34,16 @@
 
 <div class="font-body border-[1px] border-black mb-5">
 	<div class="p-6">
-		<div class="font-light font-display italic pb-4 text-3xl color-p_text flex flex-wrap gap-x-6">
+		<div
+			class="font-light font-display italic pb-3 sm:pb-6 sm:pt-3 text-xl sm:text-3xl color-p_text flex flex-wrap gap-x-6 gap-y-2"
+		>
 			{#if tags}
 				{#each tags.slice(0, 3) as tag}
-					<div class="py-3"># {tag}</div>
+					<div class=""># {tag}</div>
 				{/each}
 			{/if}
 		</div>
-		<div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
 			{#each peekArticles as article}
 				{#if article.articleData}
 					<Article
@@ -55,7 +57,10 @@
 			{/each}
 		</div>
 		{#if expanded && groupedArticles.length > numPeekArticles}
-			<div class="pt-4 grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4" transition:fade>
+			<div
+				class="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4"
+				transition:fade
+			>
 				{#each hiddenArticles as article}
 					{#if article.articleData}
 						<Article

@@ -35,14 +35,16 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="{src
-		? 'col-span-2'
-		: 'col-span-1'} outline outline-1 outline-black hover:outline-2 hover:outline-p_red relative shadow h-70 w-full py-5 px-4 flex flex-row items-center gap-4 overflow-hidden font-body color-p_text card hover:bg-white/30"
+		? 'row-span-2 sm:row-span-1 sm:col-span-2'
+		: 'row-span-1 sm:col-span-1'} outline outline-1 outline-black hover:outline-2 hover:outline-p_red relative shadow h-70 w-full py-5 px-4 flex flex-col sm:flex-row items-center gap-4 overflow-hidden font-body color-p_text card hover:bg-white/30"
 	role="button"
 	tabindex="0"
 	on:click={openModal}
 >
 	{#if src}
-		<div class="max-w-[50%] w-[350px] h-60 shrink-0 outline outline-1 outline-black">
+		<div
+			class="sm:px-0 sm:max-w-[50%] w-full sm:w-[350px] h-60 shrink-0 outline outline-1 outline-black overflow-hidden"
+		>
 			<img {src} {alt} class="w-full h-full object-cover" />
 		</div>
 	{/if}

@@ -41,14 +41,18 @@
 			formElement.submit();
 		}
 	}
+
+	let innerWidth;
 </script>
 
-<div class="h-full inline-flex items-center justify-center ml-4">
-	{#if isClicked}
-		<div class="flex flex-row font-body" transition:slide={{ axis: 'x' }}>
+<svelte:window bind:innerWidth />
+
+<div class="h-full inline-flex items-center justify-center sm:ml-4 w-full sm:w-auto">
+	{#if isClicked || innerWidth < 640}
+		<div class="flex flex-row font-body w-full" transition:slide={{ axis: 'x' }}>
 			{#each filterData as filter}
 				<button
-					class="h-full border-black border-[1px] py-2 px-5 border-e-0 flex flex-row gap-2 hover:underline"
+					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline"
 					on:click={() => {
 						if (filter.ascending == true) {
 							filter.ascending = false;
@@ -114,7 +118,7 @@
 	{/if}
 	<button
 		on:click={toggleFilter}
-		class="border-black border-[1px] p-2 hover:shadow-[0_3px_3px_rgba(0,0,0,0.3)]"
+		class="border-black border-[1px] p-2 sm:hover:shadow-[0_3px_3px_rgba(0,0,0,0.3)] -order-last sm:order-last"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
