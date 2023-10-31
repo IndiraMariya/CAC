@@ -15,9 +15,11 @@
 <div class="font-body border-[1px] border-black mb-5">
 	<div class="p-6">
 		<div class="font-light font-display italic pb-4 text-2xl color-p_text flex flex-wrap">
-			{#each tags as tag}
-				<div class="p-3"># {tag}</div>
-			{/each}
+			{#if tags}
+				{#each tags.slice(0, 3) as tag}
+					<div class="p-3"># {tag}</div>
+				{/each}
+			{/if}
 		</div>
 		<div class="articles grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
 			<!-- TODO: Account for accurately grouping articles without images -->
