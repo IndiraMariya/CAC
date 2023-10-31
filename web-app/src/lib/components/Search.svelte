@@ -1,13 +1,13 @@
 <script>
 	import Filter from './Filter.svelte';
 	import { slide } from 'svelte/transition';
+	import { getContext } from 'svelte';
 
 	let showMessage = false;
 	let isClicked = false;
 
 	export let searchText = '#';
 	export let searchingTags = false;
-	export let filterData;
 
 	function setSearchingTags(searchText) {
 		searchingTags = searchText.trim().substring(0, 1) == '#';
@@ -51,6 +51,6 @@
 				</span>
 			{/if}
 		</div>
-		<Filter bind:filterData />
+		<Filter />
 	</div>
 </div>

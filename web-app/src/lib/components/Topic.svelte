@@ -2,6 +2,7 @@
 	import { fade, slide, blur } from 'svelte/transition';
 	import { getArticles } from '../../utilities';
 	import Article from './Article.svelte';
+	import { getContext } from 'svelte';
 
 	export let topic = -1;
 	export let tags = [''];
@@ -9,10 +10,10 @@
 	 * @type {any[]}
 	 */
 	export let articles = [];
-	export let filterData;
+	let filterData = getContext('filterData');
 	export let searchText = '';
 
-	$: ({ peek, hidden } = getArticles(articles, filterData, searchText));
+	$: ({ peek, hidden } = getArticles(articles, $filterData, searchText));
 
 	export let showModal = false;
 	export let modalData;
@@ -74,32 +75,34 @@
 					{/if}
 				{/each}
 			</div>
-			{#if expanded && hiddenArticles.length > 0}
-				<div
-					class="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4"
-					transition:fade
+			{#if hiddenArticles.length > 0}
+				{#if expanded}
+					<div
+						class="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4"
+						transition:fade
+					>
+						{#each hiddenArticles as article}
+							{#if article.articleData}
+								<Article
+									{...article.articleData}
+									sourceLean={article.source_lean}
+									bias={article.bias}
+									bind:showModal
+									bind:modalData
+								/>
+							{/if}
+						{/each}
+					</div>
+				{/if}
+				<button
+					on:click={() => {
+						expanded = !expanded;
+					}}
+					class="p-3 mt-6 border-black border-[1px]"
 				>
-					{#each hiddenArticles as article}
-						{#if article.articleData}
-							<Article
-								{...article.articleData}
-								sourceLean={article.source_lean}
-								bias={article.bias}
-								bind:showModal
-								bind:modalData
-							/>
-						{/if}
-					{/each}
-				</div>
+					{expanded ? 'See less...' : 'See More...'}
+				</button>
 			{/if}
-			<button
-				on:click={() => {
-					expanded = !expanded;
-				}}
-				class="p-3 mt-6 border-black border-[1px]"
-			>
-				{expanded ? 'See less...' : 'See More...'}
-			</button>
 		</div>
 	</div>
 {/if}

@@ -58,20 +58,23 @@ function groupArticlesWithImages(articles) {
 
 function sortArticles(articles, filterData) {
 	let sortedArticles = articles.slice();
-	sortedArticles.sort((a, b) => {
-		return (
-			// date
-			(filterData[0].ascending != null &&
-				(new Date(a.articleData[filterData[0].value]).getTime() -
-					new Date(b.articleData[filterData[0].value]).getTime()) *
-					(filterData[0].ascending ? 1 : -1)) ||
-			// bias
-			(filterData[2].ascending != null &&
-				(biasToNumber[a.articleData[filterData[2].value]] -
-					biasToNumber[b.articleData[filterData[2].value]]) *
-					(filterData[2].ascending ? 1 : -1))
-		);
-	});
+
+	// sort by date
+	if (filterData[0].ascending != null) {
+		sortedArticles.sort((a, b) => {
+			return (
+				(new Date(a.articleData['date']).getTime() - new Date(b.articleData['date']).getTime()) *
+				(filterData[0].ascending ? 1 : -1)
+			);
+		});
+	} else if (filterData[2].ascending != null) {
+		sortedArticles.sort((a, b) => {
+			return (
+				(biasToNumber[a['bias']] - biasToNumber[b['bias']]) * (filterData[2].ascending ? 1 : -1)
+			);
+		});
+	}
+
 	return sortedArticles;
 }
 
@@ -116,4 +119,22 @@ export function filterDataBySearch(topics, searchQuery) {
 	}
 
 	return newTopics;
+}
+
+export function sortData(topics, filterData) {
+	// sort by popularity
+	if (filterData[1].ascending != null) {
+		topics.sort((a, b) => {
+			return (a.articles.length - b.articles.length) * (filterData[1].ascending ? 1 : -1);
+		});
+	}
+
+	return topics;
+}
+
+export function getData(topics, searchQuery, filterData) {
+	let filteredTopics = filterDataBySearch(topics, searchQuery);
+	let sortedTopics = sortData(filteredTopics, filterData);
+
+	return sortedTopics;
 }

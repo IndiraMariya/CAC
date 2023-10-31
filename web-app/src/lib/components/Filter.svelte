@@ -1,18 +1,15 @@
 <script>
+	import { getContext } from 'svelte';
 	import { slide } from 'svelte/transition';
 
 	let isClicked = false;
 
-	export let filterData = [
-		{ name: 'Date', value: 'date', ascending: null },
-		{ name: 'Topic', value: 'topic', ascending: null },
-		{ name: 'Bias', value: 'bias', ascending: null }
-	];
+	let filterData = getContext('filterData');
 
 	// Function to set the current filter criteria
 	function setFilter(value) {
-		for (let i = 0; i < filterData.length; i++) {
-			let filter = filterData[i];
+		for (let i = 0; i < $filterData.length; i++) {
+			let filter = $filterData[i];
 			if (filter.value == value) {
 				if (filter.ascending == true) {
 					filter.ascending = false;
@@ -25,21 +22,8 @@
 				filter.ascending = null;
 			}
 		}
-		filterData = filterData;
+		$filterData = $filterData;
 	}
-
-	// // Update the URL when filterCriteria changes
-	// const urlSearchParams = new URLSearchParams(window.location.search);
-	// const existingQ = urlSearchParams.get('q');
-	// urlSearchParams.set('filter', filterCriteria);
-	// // If 'q' parameter exists, set it back to the updated URL
-	// if (existingQ) {
-	// 	urlSearchParams.set('q', existingQ);
-	// }
-
-	// const updatedURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
-	// window.history.pushState({}, '', updatedURL);
-	// window.location.reload();
 
 	function toggleFilter() {
 		isClicked = !isClicked;
@@ -52,7 +36,7 @@
 <div class="h-full inline-flex items-center justify-center sm:ml-3 w-full sm:w-auto">
 	{#if isClicked || innerWidth < 640}
 		<div class="flex flex-row font-body w-full" transition:slide={{ axis: 'x' }}>
-			{#each filterData as filter}
+			{#each $filterData as filter}
 				<button
 					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline {filter.ascending !=
 					null

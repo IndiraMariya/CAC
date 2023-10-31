@@ -6,7 +6,10 @@
 	import Search from '$lib/components/Search.svelte';
 	import Filter from '$lib/components/Filter.svelte';
 	import Topic from '$lib/components/Topic.svelte';
-	import { filterDataBySearch } from '../utilities.js';
+	import { filterDataBySearch, getData, sortData } from '../utilities.js';
+
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	export let data;
 
@@ -25,15 +28,18 @@
 		bias: ''
 	};
 
-	let filterData = [
+	let filterData = writable([
 		{ name: 'Date', value: 'date', ascending: null },
-		{ name: 'Topic', value: 'topic', ascending: null },
+		{ name: 'Popularity', value: 'popularity', ascending: null },
 		{ name: 'Bias', value: 'bias', ascending: null }
-	];
+	]);
+	setContext('filterData', filterData);
+
 	let searchText = '#';
 	let searchingTags = false;
 
 	$: filteredTopics = filterDataBySearch(data.articlesGroups, searchText);
+	$: sortedTopics = sortData(filteredTopics, $filterData);
 </script>
 
 <div class="min-h-[100vh] flex flex-col justify-between">
@@ -43,10 +49,10 @@
 		<div class="p-5 pt-0 text-black w-full h-full">
 			<Nav />
 			<div class="flex items-center p-0">
-				<Search bind:searchText bind:searchingTags bind:filterData />
+				<Search bind:searchText bind:searchingTags />
 			</div>
-			{#each filteredTopics as topic}
-				<Topic {...topic} bind:showModal bind:modalData bind:filterData bind:searchText />
+			{#each sortedTopics as topic}
+				<Topic {...topic} bind:showModal bind:modalData bind:searchText />
 			{/each}
 		</div>
 	</div>
