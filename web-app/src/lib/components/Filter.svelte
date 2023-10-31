@@ -2,9 +2,6 @@
 	import { slide } from 'svelte/transition';
 
 	let isClicked = false;
-	let isPicked = false;
-	let formElement;
-	let filterCriteria = '';
 
 	export let filterData = [
 		{ name: 'Date', value: 'date', ascending: null },
@@ -14,34 +11,39 @@
 
 	// Function to set the current filter criteria
 	function setFilter(value) {
-		filterCriteria = value;
-		isPicked = !isPicked;
-
-		// Update the URL when filterCriteria changes
-		const urlSearchParams = new URLSearchParams(window.location.search);
-		const existingQ = urlSearchParams.get('q');
-		urlSearchParams.set('filter', filterCriteria);
-		// If 'q' parameter exists, set it back to the updated URL
-		if (existingQ) {
-			urlSearchParams.set('q', existingQ);
+		for (let i = 0; i < filterData.length; i++) {
+			let filter = filterData[i];
+			if (filter.value == value) {
+				if (filter.ascending == true) {
+					filter.ascending = false;
+				} else if (filter.ascending == false) {
+					filter.ascending = null;
+				} else if (filter.ascending == null) {
+					filter.ascending = true;
+				}
+			} else {
+				filter.ascending = null;
+			}
 		}
-
-		const updatedURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
-		window.history.pushState({}, '', updatedURL);
-		window.location.reload();
+		filterData = filterData;
 	}
+
+	// // Update the URL when filterCriteria changes
+	// const urlSearchParams = new URLSearchParams(window.location.search);
+	// const existingQ = urlSearchParams.get('q');
+	// urlSearchParams.set('filter', filterCriteria);
+	// // If 'q' parameter exists, set it back to the updated URL
+	// if (existingQ) {
+	// 	urlSearchParams.set('q', existingQ);
+	// }
+
+	// const updatedURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
+	// window.history.pushState({}, '', updatedURL);
+	// window.location.reload();
 
 	function toggleFilter() {
 		isClicked = !isClicked;
 	}
-
-	// Watch for changes in isPicked
-	$: {
-		if (isPicked) {
-			formElement.submit();
-		}
-	}
-
 	let innerWidth;
 </script>
 
@@ -52,20 +54,17 @@
 		<div class="flex flex-row font-body w-full" transition:slide={{ axis: 'x' }}>
 			{#each filterData as filter}
 				<button
-					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline"
+					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline {filter.ascending !=
+					null
+						? 'bg-black text-p_bg'
+						: 'bg-p_bg text-black'}"
 					on:click={() => {
-						if (filter.ascending == true) {
-							filter.ascending = false;
-						} else if (filter.ascending == false) {
-							filter.ascending = null;
-						} else if (filter.ascending == null) {
-							filter.ascending = true;
-						}
+						setFilter(filter.value);
 					}}
 				>
 					<span>{filter.name}</span>
-					{#if filter.ascending == true}
-						<span>
+					<span>
+						{#if filter.ascending == true}
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -80,38 +79,38 @@
 									d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 								/>
 							</svg>
-						</span>
-					{:else if filter.ascending == false}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
-					{:else}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
-					{/if}
+						{:else if filter.ascending == false}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						{:else}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						{/if}
+					</span>
 				</button>
 			{/each}
 		</div>
