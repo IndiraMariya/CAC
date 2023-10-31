@@ -47,3 +47,25 @@ export function groupArticlesWithImages(articles, filterData) {
 	}
 	return newArticles;
 }
+
+export function filterDataBySearch(topics, searchQuery) {
+	let newTopics = [];
+	// search by tag
+	if (searchQuery.trim().substring(0, 1) == '#') {
+		let strippedQuery = searchQuery.trim().substring(1);
+
+		for (let i = 0; i < topics.length; i++) {
+			for (let j = 0; j < topics[i].tags.length; j++) {
+				if (topics[i].tags[j].includes(strippedQuery)) {
+					newTopics.push(topics[i]);
+					break;
+				}
+			}
+		}
+	} else {
+		// TODO: make this actually work
+		newTopics = topics.slice();
+	}
+
+	return newTopics;
+}

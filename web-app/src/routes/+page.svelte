@@ -6,8 +6,10 @@
 	import Search from '$lib/components/Search.svelte';
 	import Filter from '$lib/components/Filter.svelte';
 	import Topic from '$lib/components/Topic.svelte';
+	import { filterDataBySearch } from '../utilities.js';
 
 	export let data;
+
 	let showModal = false;
 	let modalData = {
 		title: '',
@@ -22,14 +24,16 @@
 		sourceLean: '',
 		bias: ''
 	};
+
 	let filterData = [
 		{ name: 'Date', value: 'date', ascending: null },
 		{ name: 'Topic', value: 'topic', ascending: null },
 		{ name: 'Bias', value: 'bias', ascending: null }
 	];
 	let searchText = '';
-
 	let searchingTags = false;
+
+	$: filteredTopics = filterDataBySearch(data.articlesGroups, searchText);
 </script>
 
 <div class="min-h-[100vh] flex flex-col justify-between">
@@ -41,7 +45,7 @@
 			<div class="flex items-center p-0">
 				<Search bind:searchText bind:searchingTags bind:filterData />
 			</div>
-			{#each data.articlesGroups as topic}
+			{#each filteredTopics as topic}
 				<Topic {...topic} bind:showModal bind:modalData bind:filterData />
 			{/each}
 		</div>
