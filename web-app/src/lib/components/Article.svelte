@@ -42,7 +42,7 @@
 	on:click={openModal}
 >
 	{#if src}
-		<div class="max-w-[50%] w-[350px] h-60 shrink-0">
+		<div class="max-w-[50%] w-[350px] h-60 shrink-0 outline outline-1 outline-black">
 			<img {src} {alt} class="w-full h-full object-cover" />
 		</div>
 	{/if}
@@ -50,12 +50,16 @@
 	<div class="h-full flex flex-col justify-between w-full">
 		<div class="font-normal text-2xl color-p_text">{title}</div>
 
-		<div class="">
-			<div class="text-p_red">{new Date(date).toLocaleDateString()}</div>
+		<div class="flex flex-row gap-2 text-center flex-wrap">
 			<div
-				class="text-sm py-1 px-2 bg-{color} text-white uppercase italic font-normal outline outline-1 outline-black inline-block"
+				class="text-sm py-1 px-2 bg-{color} text-white uppercase italic font-normal outline outline-1 outline-black inline-block min-w-max"
 			>
 				{newsSource}
+			</div>
+			<div
+				class="bg-p_red text-white text-sm font-normal py-1 px-2 outline outline-1 outline-black inline-block"
+			>
+				{new Date(date).toLocaleDateString()}
 			</div>
 		</div>
 	</div>
