@@ -47,7 +47,7 @@
 
 <svelte:window bind:innerWidth />
 
-<div class="h-full inline-flex items-center justify-center sm:ml-4 w-full sm:w-auto">
+<div class="h-full inline-flex items-center justify-center sm:ml-3 w-full sm:w-auto">
 	{#if isClicked || innerWidth < 640}
 		<div class="flex flex-row font-body w-full" transition:slide={{ axis: 'x' }}>
 			{#each filterData as filter}
