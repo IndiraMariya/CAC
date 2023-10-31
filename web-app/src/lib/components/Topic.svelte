@@ -19,13 +19,29 @@
 	let innerWidth;
 	let expanded = false;
 
-	function getNumArticles(innerWidth) {
-		if (innerWidth > 1280) return 3;
-		if (innerWidth > 1024) return 4;
-		else return 2;
+	function getNumArticles(innerWidth, groupedArticles) {
+		let numCols;
+		if (innerWidth > 1280) numCols = 3;
+		else if (innerWidth > 1024) numCols = 4;
+		else numCols = 2;
+
+		let spotsFilled = 0;
+		let numArticles = 0;
+		while (spotsFilled < numCols * 2 && numArticles < groupedArticles.length) {
+			// has image
+			if (groupedArticles[numArticles].articleData.src) {
+				spotsFilled += 2;
+			}
+			// doesn't have image
+			else {
+				spotsFilled += 1;
+			}
+			numArticles += 1;
+		}
+		return numArticles;
 	}
 
-	$: numPeekArticles = getNumArticles(innerWidth);
+	$: numPeekArticles = getNumArticles(innerWidth, groupedArticles);
 	$: peekArticles = groupedArticles.slice(0, numPeekArticles);
 	$: hiddenArticles = groupedArticles.slice(numPeekArticles);
 </script>

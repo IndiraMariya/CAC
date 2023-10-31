@@ -21,7 +21,7 @@ export async function load({ url }) {
 	for (let i = 0; i < max_topic + 1; i++) {
 		let articles = data.filter((article) => article['topic'] == i);
 
-		if (articles.length > 2) {
+		if (articles.length) {
 			let firstArticle = articles[0];
 			groupedArticles.push({
 				topic: firstArticle['topic'],
