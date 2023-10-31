@@ -27,6 +27,9 @@
 		{ name: 'Topic', value: 'topic', ascending: null },
 		{ name: 'Bias', value: 'bias', ascending: null }
 	];
+	let searchText = '';
+
+	let searchingTags = false;
 </script>
 
 <div class="min-h-[100vh] flex flex-col justify-between">
@@ -36,7 +39,7 @@
 		<div class="p-5 pt-0 text-black w-full h-full">
 			<Nav />
 			<div class="flex items-center p-0">
-				<Search bind:filterData />
+				<Search bind:searchText bind:searchingTags bind:filterData />
 			</div>
 			{#each data.articlesGroups as topic}
 				<Topic {...topic} bind:showModal bind:modalData bind:filterData />
