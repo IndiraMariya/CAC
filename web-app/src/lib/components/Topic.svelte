@@ -9,7 +9,7 @@
 	 */
 	export let articles = [];
 
-	articles = groupArticlesWithImages(articles);
+	$: groupedArticles = groupArticlesWithImages(articles);
 
 	export let showModal = false;
 	export let modalData;
@@ -26,7 +26,7 @@
 		</div>
 		<div class="articles grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
 			<!-- TODO: Account for accurately grouping articles without images -->
-			{#each articles as article}
+			{#each groupedArticles as article}
 				{#if article.articleData}
 					<Article
 						{...article.articleData}
