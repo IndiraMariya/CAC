@@ -6,10 +6,10 @@
 	let formElement;
 	let filterCriteria = '';
 
-	const filterOptions = [
-		{ name: 'Date', value: 'date' },
-		{ name: 'Topic', value: 'topic' },
-		{ name: 'Bias', value: 'bias' }
+	export let filterData = [
+		{ name: 'Date', value: 'date', ascending: null },
+		{ name: 'Topic', value: 'topic', ascending: null },
+		{ name: 'Bias', value: 'bias', ascending: null }
 	];
 
 	// Function to set the current filter criteria
@@ -46,8 +46,69 @@
 <div class="h-full inline-flex items-center justify-center ml-4">
 	{#if isClicked}
 		<div class="flex flex-row font-body" transition:slide={{ axis: 'x' }}>
-			{#each filterOptions as filter}
-				<div class="h-full border-black border-[1px] p-2 border-e-0">{filter.name}</div>
+			{#each filterData as filter}
+				<button
+					class="h-full border-black border-[1px] py-2 px-5 border-e-0 flex flex-row gap-2 hover:underline"
+					on:click={() => {
+						if (filter.ascending == true) {
+							filter.ascending = false;
+						} else if (filter.ascending == false) {
+							filter.ascending = null;
+						} else if (filter.ascending == null) {
+							filter.ascending = true;
+						}
+					}}
+				>
+					<span>{filter.name}</span>
+					{#if filter.ascending == true}
+						<span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						</span>
+					{:else if filter.ascending == false}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+					{:else}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+					{/if}
+				</button>
 			{/each}
 		</div>
 	{/if}

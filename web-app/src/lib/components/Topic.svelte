@@ -8,8 +8,9 @@
 	 * @type {any[]}
 	 */
 	export let articles = [];
+	export let filterData;
 
-	$: groupedArticles = groupArticlesWithImages(articles);
+	$: groupedArticles = groupArticlesWithImages(articles, filterData);
 
 	export let showModal = false;
 	export let modalData;

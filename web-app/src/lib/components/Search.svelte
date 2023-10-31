@@ -7,6 +7,8 @@
 
 	let searchText = '';
 
+	export let filterData;
+
 	function toggleMessage() {
 		showMessage = !showMessage;
 		isClicked = !isClicked;
@@ -16,7 +18,7 @@
 <form action="/" class="w-full">
 	<div class="flex flex-row mb-3 items-stretch w-full">
 		<div
-			class="h-full border-[1px] border-black drop-shadow-sm font-body bg-p_bg hover:shadow-[0_3px_3px_rgba(0,0,0,0.3)] focus-within:shadow-[0_3px_3px_rgba(0,0,0,0.3)] w-[30%] focus-within:w-full transition-[width] duration-500 linear relative p-2"
+			class="h-full border-[1px] border-black drop-shadow-sm font-body bg-p_bg hover:shadow-[0_3px_3px_rgba(0,0,0,0.3)] focus-within:shadow-[0_3px_3px_rgba(0,0,0,0.3)] w-[30%] min-w-max relative p-2"
 		>
 			<span class="absolute inset-y-0 left-0 flex items-center pl-2 h-full">
 				<svg
@@ -43,6 +45,6 @@
 			/>
 			<!-- <p>You entered: {searchText}</p> Display the entered text -->
 		</div>
-		<Filter />
+		<Filter bind:filterData />
 	</div>
 </form>

@@ -22,6 +22,11 @@
 		sourceLean: '',
 		bias: ''
 	};
+	let filterData = [
+		{ name: 'Date', value: 'date', ascending: null },
+		{ name: 'Topic', value: 'topic', ascending: null },
+		{ name: 'Bias', value: 'bias', ascending: null }
+	];
 </script>
 
 <div class="min-h-[100vh] flex flex-col justify-between">
@@ -31,10 +36,10 @@
 		<div class="p-5 pt-0 text-black w-full h-full">
 			<Nav />
 			<div class="flex items-center p-0">
-				<Search />
+				<Search bind:filterData />
 			</div>
 			{#each data.articlesGroups as topic}
-				<Topic {...topic} bind:showModal bind:modalData />
+				<Topic {...topic} bind:showModal bind:modalData bind:filterData />
 			{/each}
 		</div>
 	</div>

@@ -7,10 +7,9 @@ export async function load({ url }) {
 		filter = 'date';
 	}
 
-	const { data, error } = await supabase
-		.rpc('get_data')
-		.ilike('name', `%${search_term}%`)
-		.order(filter, { ascending: false, nullsFirst: false });
+	const { data, error } = await supabase.rpc('get_data').ilike('name', `%${search_term}%`);
+	// .order(filter, { ascending: false, nullsFirst: false })
+	// .order(filter, { ascending: false, nullsFirst: false });
 
 	let max_topic = -1;
 	for (let i = 0; i < data.length; i++) {
