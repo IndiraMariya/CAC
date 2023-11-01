@@ -49,9 +49,9 @@
 	<div class="font-body border-[1px] border-black mb-5 shadow-[0_3px_3px_rgba(0,0,0,0.3)]">
 		<div class="p-6">
 			<div
-				class="font-light font-display italic pb-3 sm:pb-6 sm:pt-3 text-xl sm:text-3xl color-p_text flex flex-wrap gap-x-6 gap-y-2"
+				class="font-light font-display mb-3 sm:mb-6 sm:pt-3 text-xl sm:text-3xl color-p_text bg-gradient-to-r from-p_red to-p_blue bg-[length:100%_5px] bg-no-repeat bg-bottom inline-block"
 			>
-				What's the daily scoop?
+				the daily scoop
 			</div>
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4">
 				{#each peekScoops as scoop}
