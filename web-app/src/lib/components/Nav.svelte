@@ -1,10 +1,10 @@
 <div class="pt-6">
-	<a href="/" class="block pb-3">
+	<a href="/" class="block pb-4">
 		<!-- svelte-ignore a11y-img-redundant-alt -->
 		<img
-			src="/cartoonsketches500.png"
+			src="/newlogo.png"
 			alt="Stylized version of The Double Scoop"
-			width="90"
+			width="300"
 			height="30"
 			class="mx-auto inset-0 flex items-center justify-center top-4"
 		/>

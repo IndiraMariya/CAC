@@ -98,7 +98,7 @@
 					on:click={() => {
 						expanded = !expanded;
 					}}
-					class="p-3 mt-6 border-black border-[1px]"
+					class="px-3 py-2 mt-3 outline outline-black outline-1 hover:shadow-[0_3px_3px_rgba(0,0,0,0.3)]"
 				>
 					{expanded ? 'See less...' : 'See More...'}
 				</button>

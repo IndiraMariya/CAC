@@ -12,10 +12,10 @@
 			let filter = $filterData[i];
 			if (filter.value == value) {
 				if (filter.ascending == true) {
-					filter.ascending = false;
-				} else if (filter.ascending == false) {
 					filter.ascending = null;
 				} else if (filter.ascending == null) {
+					filter.ascending = false;
+				} else if (filter.ascending == false) {
 					filter.ascending = true;
 				}
 			} else {
