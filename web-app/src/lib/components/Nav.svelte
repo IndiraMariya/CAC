@@ -21,9 +21,9 @@
 					<img src="/logo2.png" alt="Learn" class="w-4 h-6 mr-1 inline" />
 					<span>LEARN</span>
 				</a>
-				<a class="nav-link px-4 hover:text-red-500" href="/about">
-					<img src="/logo3.png" alt="About" class="w-6 h-6 mr-1 inline" />
-					<span>ABOUT</span>
+				<a class="nav-link px-4 hover:text-red-500" href="/stats">
+					<img src="/logo3.png" alt="Stats" class="w-6 h-6 mr-1 inline" />
+					<span>STATS</span>
 				</a>
 				<a class="nav-link px-4 hover:text-red-500" href="/contact">
 					<img src="/logo4.png" alt="Contact" class="w-6 h-6 mr-1 inline" />
