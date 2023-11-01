@@ -47,7 +47,7 @@
 			<!-- <p>You entered: {searchText}</p> Display the entered text -->
 			{#if searchingTags}
 				<span class="absolute inset-y-0 right-0 flex items-center pr-2 h-full text-sm text-cente">
-					<div class="bg-black/10 rounded p-1 px-2 text-xs">searching tags</div>
+					<div class="bg-black/10 rounded p-1 px-2 text-xs">searching topics</div>
 				</span>
 			{/if}
 		</div>
