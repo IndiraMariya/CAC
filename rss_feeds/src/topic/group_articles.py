@@ -1,6 +1,3 @@
-import os
-from dotenv import load_dotenv
-from supabase import create_client, Client
 import pandas as pd
 import numpy as np
 
@@ -21,16 +18,15 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
-load_dotenv()
+from keyword_extraction import extract_keybert_keyterms
+from subjectivity_analysis import get_subjectivities
+from utilities import get_supabase_client, read_data_from_supabase, get_grouped_data
 
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
-print("establishing client")
-supabase: Client = create_client(url, key)
+supabase = get_supabase_client()
 
 # load in data
 print("Reading in data")
-response = supabase.table('Data').select("*").execute()
+response = read_data_from_supabase(supabase)
 data = [[article['id'], article['articleData']['title'], article['articleData']['description']] for article in response.data if article is not None and article["articleData"] is not None]
 data = pd.DataFrame(data, columns=["id", "title", "description"])
 
@@ -125,15 +121,27 @@ elif ALG == _DBSCAN:
     NUM_CLUSTERS = len(cluster_sizes)
     print(f"Number of elements assigned to each cluster: {cluster_sizes}")
 
-data['group'] = clusterer.labels_
+data['topic'] = clusterer.labels_
+combined['topic'] = clusterer.labels_
 
-for cluster in range(NUM_CLUSTERS):
-    print("-------------- CLUSTER #" + str(cluster))
-    print(data.loc[data['group'] == cluster]['title'])
+# for cluster in range(NUM_CLUSTERS):
+#     print("-------------- CLUSTER #" + str(cluster))
+#     print(data.loc[data['topic'] == cluster]['title'])
+
+# get tags
+print("analyzing topics")
+grouped_data_as_list = get_grouped_data(combined)
+tags = extract_keybert_keyterms(grouped_data_as_list)
+data['tags'] = data['topic'].map({topic: tags for topic, tags in enumerate(tags)})
+
+# get subjectivity
+print("analyzing subjectivity")
+subjectivities = get_subjectivities(combined['text'].values.tolist())
+data['bias'] = subjectivities
 
 # write data to supabase
-only_topics_df = data[['id', 'title', 'group']]
-only_topics_df = only_topics_df.rename(columns={'title': "name", 'group': "topic"})
+only_topics_df = data[['id', 'title', 'topic', 'tags', 'bias']]
+only_topics_df = only_topics_df.rename(columns={'title': "name"})
 
 print(only_topics_df.head())
 
