@@ -39,6 +39,7 @@
 		: 'row-span-1 sm:col-span-1'} outline outline-1 outline-black hover:outline-2 hover:outline-p_red relative shadow h-70 w-full py-5 px-4 flex flex-col sm:flex-row items-center gap-4 overflow-hidden font-body color-p_text card hover:bg-white/30"
 	role="button"
 	tabindex="0"
+	title={description}
 	on:click={openModal}
 >
 	{#if src}

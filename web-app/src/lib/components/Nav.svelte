@@ -2,7 +2,7 @@
 	<a href="/" class="block pb-4">
 		<!-- svelte-ignore a11y-img-redundant-alt -->
 		<img
-			src="/newlogo.png"
+			src="/logo.png"
 			alt="Stylized version of The Double Scoop"
 			width="300"
 			height="30"

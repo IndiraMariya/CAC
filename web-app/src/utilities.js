@@ -138,3 +138,31 @@ export function getData(topics, searchQuery, filterData) {
 
 	return sortedTopics;
 }
+
+// gets one article chosen from random from each topic and returns the "scoop" (article + relevant topic linkage)
+export function getDailyScoops(topics) {
+	let today = new Date('10/30/2023').setHours(0, 0, 0, 0); // TODO: remove the yesterday article
+
+	let scoops = [];
+
+	for (let i = 0; i < topics.length; i++) {
+		let dailyArticles = topics[i].articles.filter(
+			(article) => new Date(article.articleData.date).setHours(0, 0, 0, 0) == today
+		);
+
+		// there are articles from today
+		if (dailyArticles.length > 0) {
+			scoops.push({
+				numArticles: dailyArticles.length,
+				topic: topics[i].topic,
+				keywords: topics[i].tags,
+				article: dailyArticles[Math.floor(Math.random() * dailyArticles.length)] // random article to represent the "scoop"
+			});
+		}
+	}
+	scoops.sort((a, b) => {
+		return b.numArticles - a.numArticles;
+	});
+
+	return scoops;
+}
