@@ -56,6 +56,32 @@ function groupArticlesWithImages(articles) {
 	return newArticles;
 }
 
+function groupScoopsWithImages(scoops) {
+	let newArticles = [];
+	let lastNoPhoto = null;
+	for (let i = 0; i < scoops.length; i++) {
+		let firstArticle = scoops[i].article;
+		if (firstArticle.articleData) {
+			if (firstArticle.articleData.src) {
+				newArticles.push(scoops[i]);
+			} else {
+				if (lastNoPhoto) {
+					newArticles.push(lastNoPhoto);
+					newArticles.push(scoops[i]);
+
+					lastNoPhoto = null;
+				} else {
+					lastNoPhoto = scoops[i];
+				}
+			}
+		}
+	}
+	if (lastNoPhoto) {
+		newArticles.push(lastNoPhoto);
+	}
+	return newArticles;
+}
+
 function sortArticles(articles, filterData) {
 	let sortedArticles = articles.slice();
 
@@ -141,7 +167,7 @@ export function getData(topics, searchQuery, filterData) {
 
 // gets one article chosen from random from each topic and returns the "scoop" (article + relevant topic linkage)
 export function getDailyScoops(topics) {
-	let today = new Date('10/30/2023').setHours(0, 0, 0, 0); // TODO: remove the yesterday article
+	let today = new Date().setHours(0, 0, 0, 0); // TODO: remove the yesterday article
 
 	let scoops = [];
 
@@ -164,5 +190,16 @@ export function getDailyScoops(topics) {
 		return b.numArticles - a.numArticles;
 	});
 
-	return scoops;
+	return groupScoopsWithImages(scoops);
+}
+
+// source leans
+let sourceToLean = {
+	'New York Times': 'Far Left',
+	'Fox News': 'Right',
+	'Washington Post': 'Left'
+};
+
+export function getLean(source) {
+	return sourceToLean[source];
 }
