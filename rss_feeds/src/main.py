@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from supabase import Client
 import csv
 
-from topic.group_articles import groupArticles
+# from topic.group_articles import groupArticles
+from topic.utilities import get_supabase_client, read_data_from_supabase, get_grouped_data
 
 headers = {
     'User-Agent': 'your-user-agent-here'
@@ -46,4 +47,4 @@ if __name__ == '__main__':
         for row in content:
             source = row[1]
             switch_source(source)
-    groupArticles()
+    # groupArticles()

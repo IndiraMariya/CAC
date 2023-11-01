@@ -18,9 +18,9 @@ from nltk.stem.snowball import SnowballStemmer
 import string
 import json
 
-from keyword_extraction import extract_keybert_keyterms
-from subjectivity_analysis import get_subjectivities
-from utilities import get_supabase_client, read_data_from_supabase, get_grouped_data
+from topic.keyword_extraction import extract_keybert_keyterms
+from topic.subjectivity_analysis import get_subjectivities
+from topic.utilities import get_supabase_client, read_data_from_supabase, get_grouped_data
 
 supabase = get_supabase_client()
 
