@@ -193,6 +193,58 @@ export function getDailyScoops(topics) {
 	return groupScoopsWithImages(scoops);
 }
 
+export function getPropertyData(readingData, property, label, colorFunc) {
+	let props = {};
+
+	for (let i = 0; i < readingData.length; i++) {
+		let prop = readingData[i][property];
+		if (prop in props) {
+			props[prop] += 1;
+		} else {
+			props[prop] = 1;
+		}
+	}
+
+	let propsList = [];
+	for (let prop in props) {
+		propsList.push([prop, props[prop] / readingData.length]);
+	}
+	propsList.sort((a, b) => b[1] - a[1]);
+
+	let labels = [];
+	let values = [];
+	let colors = [];
+	for (let i = 0; i < propsList.length; i++) {
+		labels.push(propsList[i][0]);
+		values.push(propsList[i][1]);
+		if (colorFunc) {
+			colors.push(colorFunc(propsList[i][0]));
+		} else {
+			colors.push('rgba(0, 0, 0, 0.1)');
+		}
+	}
+
+	const data = {
+		labels: labels,
+		datasets: [
+			{
+				data: values,
+				backgroundColor: colors,
+				borderWidth: 0
+			}
+		]
+	};
+
+	return data;
+}
+
+export const leanToColor = {
+	'Far Left': 'rgba(59,73,155,0.5)',
+	Left: 'rgba(59,73,155,0.25)',
+	'Far Right': 'rgba(229, 49, 49, 0.5)',
+	Right: 'rgba(229, 49, 49, 0.25)'
+};
+
 // source leans
 let sourceToLean = {
 	'New York Times': 'Far Left',
@@ -202,4 +254,12 @@ let sourceToLean = {
 
 export function getLean(source) {
 	return sourceToLean[source];
+}
+
+export function getLeanColor(lean) {
+	return leanToColor[lean];
+}
+
+export function getSourceColor(source) {
+	return leanToColor[getLean(source)];
 }
