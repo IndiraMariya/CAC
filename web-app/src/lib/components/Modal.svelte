@@ -1,4 +1,6 @@
 <script>
+	import { readingData } from '../../store';
+
 	/**
 	 * @type {boolean}
 	 */
@@ -19,6 +21,21 @@
 
 	$: if (dialog && showModal) {
 		dialog.showModal();
+	}
+
+	function handleReadArticle(href) {
+		window.open(href, '_blank');
+
+		// store data
+		$readingData = [
+			...$readingData,
+			{
+				newsSource: newsSource,
+				bias: bias,
+				sourceLean: sourceLean,
+				date: new Date()
+			}
+		];
 	}
 </script>
 
@@ -82,7 +99,7 @@
 				<!-- svelte-ignore a11y-autofocus -->
 				<button
 					autofocus
-					on:click={() => window.open(href, '_blank')}
+					on:click={() => handleReadArticle(href)}
 					class="cursor-pointer border-black border-[1px] inline-block py-2 px-3 font-body"
 					>Read article</button
 				>
