@@ -38,7 +38,7 @@
 		<div class="flex flex-row font-body w-full" transition:slide={{ axis: 'x' }}>
 			{#each $filterData as filter}
 				<button
-					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline {filter.ascending !=
+					class="w-full h-full border-black border-[1px] py-2 px-5 border-s-0 sm:border-s-[1px] sm:border-e-0 flex flex-row gap-2 hover:underline text-center sm:text-left {filter.ascending !=
 					null
 						? 'bg-black text-p_bg'
 						: 'bg-p_bg text-black'}"
@@ -46,7 +46,7 @@
 						setFilter(filter.value);
 					}}
 				>
-					<span>{filter.name}</span>
+					<span class="w-full">{filter.name}</span>
 					<span>
 						{#if filter.ascending == true}
 							<svg

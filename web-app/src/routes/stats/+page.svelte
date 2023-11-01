@@ -14,22 +14,27 @@
 		LinearScale,
 		ArcElement
 	} from 'chart.js';
-	import { getLeanColor, getPropertyData, getSourceColor, leanToColor } from '../../utilities';
+	import {
+		getLeanColor,
+		getObjectivityColor,
+		getPropertyData,
+		getSourceColor
+	} from '../../utilities';
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement);
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family = 'Roboto Serif';
 
 	$: newsData = getPropertyData($readingData, 'newsSource', 'articles', getSourceColor);
-	$: biasData = getPropertyData($readingData, 'bias', 'articles');
+	$: biasData = getPropertyData($readingData, 'bias', 'articles', getObjectivityColor);
 	$: leanData = getPropertyData($readingData, 'sourceLean', 'articles', getLeanColor);
 </script>
 
 <PageContainer>
 	<Nav />
-	<h1 class="font-medium text-4xl pb-10">Your Stats</h1>
+	<h1 class="font-medium text-4xl pb-7">Your Stats</h1>
 	<div class="grid grid-cols-3 gap-6 h-10">
 		<div>
-			<div>Favorite News Sites</div>
+			<div class="text-xl pb-2">Favorite News Sites (%)</div>
 			<Bar
 				data={newsData}
 				width="100%"
@@ -51,7 +56,7 @@
 			/>
 		</div>
 		<div>
-			<div>Article Subjectivity</div>
+			<div class="text-xl pb-2">Article Subjectivity (%)</div>
 			<Bar
 				data={biasData}
 				width="100%"
@@ -73,7 +78,7 @@
 			/>
 		</div>
 		<div>
-			<div>Article Lean</div>
+			<div class="text-xl pb-2">Article Lean (%)</div>
 			<Pie
 				data={leanData}
 				width="100%"
@@ -81,11 +86,6 @@
 				options={{
 					indexAxis: 'y',
 					responsive: true,
-					scales: {
-						x: {
-							min: 0
-						}
-					},
 					plugins: {
 						legend: {
 							position: 'top'

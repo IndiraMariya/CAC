@@ -167,7 +167,7 @@ export function getData(topics, searchQuery, filterData) {
 
 // gets one article chosen from random from each topic and returns the "scoop" (article + relevant topic linkage)
 export function getDailyScoops(topics) {
-	let today = new Date().setHours(0, 0, 0, 0); // TODO: remove the yesterday article
+	let today = new Date('10/31/2023').setHours(0, 0, 0, 0); // TODO: remove the yesterday article
 
 	let scoops = [];
 
@@ -239,17 +239,18 @@ export function getPropertyData(readingData, property, label, colorFunc) {
 }
 
 export const leanToColor = {
-	'Far Left': 'rgba(59,73,155,0.5)',
-	Left: 'rgba(59,73,155,0.25)',
-	'Far Right': 'rgba(229, 49, 49, 0.5)',
-	Right: 'rgba(229, 49, 49, 0.25)'
+	Left: 'rgba(59,73,155,0.5)',
+	'Lean Left': 'rgba(59,73,155,0.25)',
+	Right: 'rgba(229, 49, 49, 0.5)',
+	'Lean Right': 'rgba(229, 49, 49, 0.25)'
 };
 
 // source leans
-let sourceToLean = {
-	'New York Times': 'Far Left',
+const sourceToLean = {
+	'New York Times': 'Left',
 	'Fox News': 'Right',
-	'Washington Post': 'Left'
+	'Washington Post': 'Lean Left',
+	'New York Post': 'Lean Right'
 };
 
 export function getLean(source) {
@@ -262,4 +263,15 @@ export function getLeanColor(lean) {
 
 export function getSourceColor(source) {
 	return leanToColor[getLean(source)];
+}
+
+const objectivityToColor = {
+	'mostly objective': 'rgba(0,0,0,0.8)',
+	'slightly objective': 'rgba(0,0,0,0.6)',
+	'slightly subjective': 'rgba(0,0,0,0.4)',
+	'mostly subjective': 'rgba(0,0,0,0.2)'
+};
+
+export function getObjectivityColor(objectivity) {
+	return objectivityToColor[objectivity];
 }
