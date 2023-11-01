@@ -1,5 +1,6 @@
 from clean_data import clearArticles
 from washpost import ReadWashpost
+from article_update import ReadRss
 from nyt import ReadNYT
 from fox import ReadFox
 import os
@@ -30,13 +31,11 @@ if __name__ == '__main__':
             ReadFox(row[0], headers, row[1], row[2])
             print(f"{case} articles successfully added" )
         elif case == 'Vox':
-            print("This is Vox")
+            ReadRss(row[0], headers, row[1], row[2])
         elif case == 'CNN':
-            print("This is CNN")
+            ReadRss(row[0], headers, row[1], row[2])
         elif case == 'New York Post':
-            print("This is NYP")
-        elif case == 'Daily Mail':
-            print("This is DM")
+            ReadRss(row[0], headers, row[1], row[2])
         else:
             print("This is the default case")
 

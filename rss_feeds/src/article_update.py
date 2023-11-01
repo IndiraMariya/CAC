@@ -5,7 +5,7 @@ import csv
 from dotenv import load_dotenv
 import os
 from supabase import Client
-import json
+from dateutil.parser import parse
 import re 
 
 headers = {
@@ -15,9 +15,11 @@ load_dotenv()
 
 count = 0
 articleIndex = 0      
+Slean = "";
 
 class ReadRss:
-    def __init__(self, rss_url, headers, source):
+    def __init__(self, rss_url, headers, source, lean):
+        Slean = lean
         global articleIndex
         self.url = rss_url
         self.headers = headers
@@ -88,10 +90,18 @@ def add_data(article_data):
     name = article_data['title']
     newsSource = article_data['newsSource']
     #insert data
+    try:
+        article_date = parse(article_data['date'], fuzzy=True)
+        date = article_date.strftime("%m/%d/%Y, %H:%M:%S")
+    except:
+        date = ""
+        # Insert data
     data = supabase.table("Data").upsert({
         "name":name, 
         "articleData": article_data, 
-        "newsSource": newsSource}).execute()
+        "newsSource": newsSource,
+        "date":date, 
+        "source_lean": Slean}).execute()
     assert len(data.data) > 0
     count = count + 1
         
@@ -124,9 +134,9 @@ def find_image(rss_link):
         print(f"An error occurred: {str(e)}")
 
 # if __name__ == '__main__':
-path = os.environ.get('SOURCE_PATH')
-with open (path) as file:
-    content = csv.reader(file)
-    for row in content:
-        feed = ReadRss(row[0], headers, row[1])
-print(f"{count} Articles Added")
+# path = os.environ.get('SOURCE_PATH')
+# with open (path) as file:
+#     content = csv.reader(file)
+#     for row in content:
+#         feed = ReadRss(row[0], headers, row[1])
+# print(f"{count} Articles Added")

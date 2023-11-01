@@ -25,7 +25,14 @@ def clearArticles():
         if "articleData" in row and "date" in row["articleData"]:
             json_date = row["articleData"]["date"]
             # Parse the JSON date using dateutil.parser with timezone mapping
-            json_datetime = parser.parse(json_date, tzinfos=tzinfos)
+            try:
+                json_datetime = parser.parse(json_date, tzinfos=tzinfos)
+            # Process the valid datetime as needed
+            except:
+            # Handle the error, e.g., log it, skip the article, or use a default date
+                print(f"Error parsing date")
+            # You can choose to skip this article or set a default date
+            continue
             one_month_ago = datetime.now(pytz.timezone('US/Eastern')) - timedelta(days=20)
             
             # Check if the JSON date is older than one month ago in Pacific timezone
