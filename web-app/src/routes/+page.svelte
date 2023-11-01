@@ -1,6 +1,6 @@
 <script>
 	import Nav from '$lib/components/Nav.svelte';
-	import Footer from '$lib/components/footer.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import Topic from '$lib/components/Topic.svelte';
@@ -41,26 +41,19 @@
 	$: sortedTopics = sortData(filteredTopics, $filterData);
 </script>
 
-<div class="min-h-[100vh] flex flex-col justify-between">
-	<div>
-		<Modal bind:showModal bind:data={modalData} />
+<div>
+	<Modal bind:showModal bind:data={modalData} />
 
-		<div class="p-5 pt-0 text-black w-full h-full">
-			<Nav />
-			<div class="flex items-center p-0">
-				<Search bind:searchText bind:searchingTags />
-			</div>
-			{#if searchText.trim() == '' || searchText.trim() == '#'}
-				<DailyScoop topics={data.articlesGroups} bind:modalData bind:showModal />
-			{/if}
-			{#each sortedTopics as topic}
-				<Topic {...topic} bind:showModal bind:modalData bind:searchText />
-			{/each}
+	<div class="p-5 pt-0 text-black w-full h-full">
+		<Nav />
+		<div class="flex items-center p-0">
+			<Search bind:searchText bind:searchingTags />
 		</div>
-	</div>
-
-	<div class="justify-self-end">
-		<Footer />
+		{#if searchText.trim() == '' || searchText.trim() == '#'}
+			<DailyScoop topics={data.articlesGroups} bind:modalData bind:showModal />
+		{/if}
+		{#each sortedTopics as topic}
+			<Topic {...topic} bind:showModal bind:modalData bind:searchText />
+		{/each}
 	</div>
 </div>
-<!-- <Topic></Topic> -->
